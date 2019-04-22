@@ -1,0 +1,7 @@
+assembler/asm
+corewar/corewar
+*~
+*.o
+*.a
+*.swp
+.clang_complete
