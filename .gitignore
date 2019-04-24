@@ -1,4 +1,4 @@
-assembler/asm
+asm/asm
 corewar/corewar
 *~
 *.o

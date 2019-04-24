@@ -9,7 +9,18 @@ D_SRC	=	./src/
 D_INC	=	./include/
 D_LIB	=	./lib/my/
 
-SRC	=	$(D_SRC)main.c		\
+SRC	=	$(D_SRC)main.c			\
+		$(D_SRC)op.c			\
+		$(D_SRC)parse_head.c		\
+		$(D_SRC)get_file.c		\
+		$(D_SRC)bad_instruction.c	\
+		$(D_SRC)check_arg.c		\
+		$(D_SRC)is_label.c		\
+		$(D_SRC)write_head.c		\
+		$(D_SRC)write_instruction.c	\
+		$(D_SRC)compile_instruction.c	\
+		$(D_SRC)set_parameter.c		\
+		$(D_SRC)is_arg.c		\
 
 OBJ	=	$(SRC:%.c=%.o)
 

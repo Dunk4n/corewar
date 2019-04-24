@@ -11,6 +11,8 @@
 #ifndef _OP_H_
 # define _OP_H_
 
+# include <unistd.h>
+
 # define MEM_SIZE                (6*1024)
 # define IDX_MOD                 512   /* modulo of the index < */
 # define MAX_ARGS_NUMBER         4     /* this may not be changed 2^*IND_SIZE */
@@ -74,6 +76,12 @@ extern  op_t    op_tab[];
 # define PROG_NAME_LENGTH        128
 # define COMMENT_LENGTH          2048
 
+typedef struct  label_s
+{
+    char    *name;
+    size_t  pos;
+}               label_t;
+
 struct header_s
 {
    int  magic;
@@ -81,6 +89,8 @@ struct header_s
    char prog_name[PROG_NAME_LENGTH + 1];
    int  prog_size;
    char comment[COMMENT_LENGTH + 1];
+   label_t *label;
+   size_t  nb_label;
 };
 
 typedef struct header_s header_t;
