@@ -53,7 +53,6 @@ S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1) {
 
 int     write_head(header_t *head, const char *name, int *fd)
 {
-    data_t data;
     int tmp = head->prog_size;
 
     *fd = open_file(name);
