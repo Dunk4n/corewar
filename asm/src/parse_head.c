@@ -48,6 +48,8 @@ char    **parse_head(char const *name, header_t *head)
         close(fd);
         return (NULL);
     }
+    if (head_or_comment != -1)
+        head_or_comment = check_label(file, head);
     if (head_or_comment == -1) {
         free_file(file);
         return (NULL);

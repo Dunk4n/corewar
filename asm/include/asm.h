@@ -52,5 +52,6 @@ int     is_ind(char *line);
 int     is_dir(char *line);
 void    set_parameter(compil_t *compil, char *line, int code, int pos);
 int     little_endian(int nb);
+int     check_label(char **file, header_t *head);
 
 #endif

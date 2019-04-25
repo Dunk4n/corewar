@@ -21,6 +21,7 @@ SRC	=	$(D_SRC)main.c			\
 		$(D_SRC)compile_instruction.c	\
 		$(D_SRC)set_parameter.c		\
 		$(D_SRC)is_arg.c		\
+		$(D_SRC)check_label.c		\
 
 OBJ	=	$(SRC:%.c=%.o)
 

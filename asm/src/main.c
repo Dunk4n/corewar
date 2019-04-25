@@ -29,7 +29,6 @@ int     main(int ac, char **av)
         return (flag_h(av[1]));
     if (!(head = malloc(sizeof(header_t))))
         return (84);
-    //TODO: in arg check if an label exist
     if (!(file = parse_head(av[1], head)))
         return (84);
     if (!write_head(head, av[1], &fd))
