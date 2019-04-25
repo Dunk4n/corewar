@@ -51,43 +51,16 @@ S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1) {
     return (fd);
 }
 
-void    write_name(int fd, header_t *head)
-{
-    size_t i = my_strlen(head->prog_name);
-    data_t data;
-
-    while (i < PROG_NAME_LENGTH) {
-        head->prog_name[i] = '\0';
-        i++;
-    }
-    write(fd, head->prog_name, PROG_NAME_LENGTH);
-    write(fd, "\0\0\0\0", 4);
-    data.nb = head->prog_size;
-    write(fd, &(data.data[3]), 1);
-    write(fd, &(data.data[2]), 1);
-    write(fd, &(data.data[1]), 1);
-    write(fd, &(data.data[0]), 1);
-    i = my_strlen(head->comment);
-    while (i < COMMENT_LENGTH) {
-        head->comment[i] = '\0';
-        i++;
-    }
-    write(fd, head->comment, COMMENT_LENGTH);
-    write(fd, "\0\0\0\0", 4);
-}
-
 int     write_head(header_t *head, const char *name, int *fd)
 {
-    *fd = open_file(name);
     data_t data;
+    int tmp = head->prog_size;
 
+    *fd = open_file(name);
     if (*fd == -1)
         return (0);
-    data.nb = head->magic;
-    write(*fd, &(data.data[3]), 1);
-    write(*fd, &(data.data[2]), 1);
-    write(*fd, &(data.data[1]), 1);
-    write(*fd, &(data.data[0]), 1);
-    write_name(*fd, head);
+    head->prog_size = little_endian(head->prog_size);
+    write(*fd, head, sizeof(header_t) - sizeof(label_t*) - sizeof(size_t));
+    head->prog_size = tmp;
     return (1);
 }

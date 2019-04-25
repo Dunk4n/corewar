@@ -22,6 +22,17 @@ void    free_file(char **file)
     free(file);
 }
 
+int     little_endian(int nb)
+{
+    int tab[4] = {0};
+
+    tab[0] = (nb & (int)0x000000ff) << 24;
+    tab[1] = (nb & (int)0x0000ff00) << 8;
+    tab[2] = (nb & (int)0x00ff0000) >> 8;
+    tab[3] = (nb & (int)0xff000000) >> 24;
+    return (tab[0] | tab[1] | tab[2] | tab[3]);
+}
+
 char    **parse_head(char const *name, header_t *head)
 {
     int     fd;
@@ -32,7 +43,7 @@ char    **parse_head(char const *name, header_t *head)
     head->nb_label = 0;
     if (!(fd = open(name, O_RDONLY)))
         return (NULL);
-    head->magic = COREWAR_EXEC_MAGIC;
+    head->magic = little_endian(COREWAR_EXEC_MAGIC);
     if (!(file = get_file(fd, 0, head, &head_or_comment))) {
         close(fd);
         return (NULL);
