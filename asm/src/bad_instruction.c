@@ -66,7 +66,7 @@ line[i + 1] == '\t' || !line[i + 1]))
     return (1);
 }
 
-int     bad_instruction(char *line, header_t *head)
+int     bad_instruction(char *line, compil_t *compil)
 {
     size_t  i = 0;
     int     tmp;
@@ -75,8 +75,8 @@ int     bad_instruction(char *line, header_t *head)
         i++;
     if (!line[i] || line[i] == COMMENT_CHAR)
         return (0);
-    tmp = is_an_instruction(line + i, head);
-    if (tmp == 0 && !is_label(line, head))
+    tmp = is_an_instruction(line + i, &(compil->head));
+    if (tmp == 0 && !is_label(line, compil))
         return (1);
     if (tmp == -1)
         return (1);

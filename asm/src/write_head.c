@@ -32,7 +32,6 @@ char    *new_name(const char *name)
     new_name[i + 2] = 'o';
     new_name[i + 3] = 'r';
     return (new_name);
-
 }
 
 int     open_file(const char *old_name)
@@ -59,7 +58,7 @@ int     write_head(header_t *head, const char *name, int *fd)
     if (*fd == -1)
         return (0);
     head->prog_size = little_endian(head->prog_size);
-    write(*fd, head, sizeof(header_t) - sizeof(label_t*) - sizeof(size_t));
+    write(*fd, head, sizeof(header_t));
     head->prog_size = tmp;
     return (1);
 }

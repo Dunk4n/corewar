@@ -8,23 +8,23 @@
 #include <stdlib.h>
 #include "asm.h"
 
-int     is_good_label(char *line, header_t *head)
+static  int     is_good_label(char *line, compil_t *compil)
 {
     size_t i = 0;
     size_t len = 0;
 
     while (good_name(line[len]))
         len++;
-    while (i < head->nb_label) {
-        if (!my_strncmp(line, head->label[i].name, len) &&
-(int)len == my_strlen(head->label[i].name))
+    while (i < compil->nb_label) {
+        if (!my_strncmp(line, compil->label[i].name, len) &&
+(int)len == my_strlen(compil->label[i].name))
             return (1);
         i++;
     }
     return (0);
 }
 
-int     check_label(char **file, header_t *head)
+int     check_label(char **file, compil_t *compil)
 {
     size_t i = 0;
     size_t j;
@@ -35,7 +35,7 @@ int     check_label(char **file, header_t *head)
 file[i][j] != LABEL_CHAR)
             j++;
         if (file[i][j] == LABEL_CHAR && good_name(file[i][j + 1]) &&
-!is_good_label(file[i] + j + 1, head))
+!is_good_label(file[i] + j + 1, compil))
             return (-1);
         i++;
     }

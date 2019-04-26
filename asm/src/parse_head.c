@@ -33,23 +33,23 @@ int     little_endian(int nb)
     return (tab[0] | tab[1] | tab[2] | tab[3]);
 }
 
-char    **parse_head(char const *name, header_t *head)
+char    **parse_head(char const *name, compil_t *compil)
 {
     int     fd;
     int     head_or_comment = 0;
     char    **file;
 
-    head->label = NULL;
-    head->nb_label = 0;
+    compil->label = NULL;
+    compil->nb_label = 0;
     if (!(fd = open(name, O_RDONLY)))
         return (NULL);
-    head->magic = little_endian(COREWAR_EXEC_MAGIC);
-    if (!(file = get_file(fd, 0, head, &head_or_comment))) {
+    compil->head.magic = little_endian(COREWAR_EXEC_MAGIC);
+    if (!(file = get_file(fd, 0, compil, &head_or_comment))) {
         close(fd);
         return (NULL);
     }
     if (head_or_comment != -1)
-        head_or_comment = check_label(file, head);
+        head_or_comment = check_label(file, compil);
     if (head_or_comment == -1) {
         free_file(file);
         return (NULL);

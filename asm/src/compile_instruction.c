@@ -64,10 +64,9 @@ static  void    parameter_byte(compil_t *compil, char *line)
         if (*line == COMMENT_CHAR)
             return ;
     }
-    //printf("%d, %d, %f, %d\n", i, (i + 1) / 4, (double)i / 4.0,
-    //(((double)i / 4.0 > i) ? 1 : 0));
-    compil->pos += 1;//(i + 1) / 4 + (((double)i / 4.0 > i - 1) ? 1 : 0);
+    compil->pos += 1;
 }
+//(i + 1) / 4 + (((double)i / 4.0 > i - 1) ? 1 : 0);
 
 void    compile_instruction(compil_t *compil, char *line)
 {

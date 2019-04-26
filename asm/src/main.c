@@ -19,21 +19,20 @@ int     flag_h(char *name)
 
 int     main(int ac, char **av)
 {
-    header_t    *head;
-    char        **file;
+    compil_t    *compil;
     int         fd;
 
     if (ac != 2)
         return (84);
     if (!my_strcmp(av[1], "-h"))
         return (flag_h(av[1]));
-    if (!(head = malloc(sizeof(header_t))))
+    if (!(compil = malloc(sizeof(compil_t))))
         return (84);
-    if (!(file = parse_head(av[1], head)))
+    if (!(compil->file = parse_head(av[1], compil)))
         return (84);
-    if (!write_head(head, av[1], &fd))
+    if (!write_head(&(compil->head), av[1], &fd))
         return (84);
-    if (!write_instruction(file, head, head->prog_size, fd))
+    if (!write_instruction(compil, fd))
         return (84);
     return (0);
 }

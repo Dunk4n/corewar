@@ -76,12 +76,6 @@ extern  op_t    op_tab[];
 # define PROG_NAME_LENGTH        128
 # define COMMENT_LENGTH          2048
 
-typedef struct  label_s
-{
-    char    *name;
-    size_t  pos;
-}               label_t;
-
 struct header_s
 {
    int  magic;
@@ -89,8 +83,6 @@ struct header_s
    char prog_name[PROG_NAME_LENGTH + 1];
    int  prog_size;
    char comment[COMMENT_LENGTH + 1];
-   label_t *label;
-   size_t  nb_label;
 };
 
 typedef struct header_s header_t;

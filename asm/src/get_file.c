@@ -69,23 +69,23 @@ my_strlen(COMMENT_CMD_STRING)) || (line[i + my_strlen(COMMENT_CMD_STRING)] !=
     return (2);
 }
 
-char    **get_file(int fd, size_t nb, header_t *head, int *head_or_comment)
+char    **get_file(int fd, size_t nb, compil_t *compil, int *head_or_comment)
 {
     char    **file;
     char    *line = get_next_line(fd);
 
-    if (*head_or_comment >= 2 && line && bad_instruction(line, head))
+    if (*head_or_comment >= 2 && line && bad_instruction(line, compil))
         *head_or_comment = -1;
     if (*head_or_comment < 2 && *head_or_comment != -1 &&  line)
-        *head_or_comment = (*head_or_comment == 0) ? get_name(head, line) :
-get_comment(head, line);
+        *head_or_comment = (*head_or_comment == 0) ? get_name(&(compil->head),
+line) : get_comment(&(compil->head), line);
     if (!line || *head_or_comment == -1) {
         if (!(file = malloc(sizeof(char*) * (nb + 1))))
             return (NULL);
         file[nb] = NULL;
         return (file);
     }
-    if (!(file = get_file(fd, nb + 1, head, head_or_comment))) {
+    if (!(file = get_file(fd, nb + 1, compil, head_or_comment))) {
         free(line);
         return (NULL);
     }

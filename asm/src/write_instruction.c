@@ -8,18 +8,6 @@
 #include <stdlib.h>
 #include "asm.h"
 
-static  char    *malloc_instruction(int prog_size)
-{
-    char    *instr = malloc(sizeof(char) * (prog_size + 1));
-    int     i = 0;
-
-    if (!instr)
-        return (NULL);
-    while (i <= prog_size)
-        instr[i++] = '\0';
-    return (instr);
-}
-
 int     get_indice(char *line, size_t len)
 {
     size_t i = 0;
@@ -51,37 +39,28 @@ static  int     is_instru(char *line)
     return (1);
 }
 
-static  compil_t        *init_compil(char **file, label_t *label, int prog_size,
-int nb_label)
+static  void    init_compil(compil_t *compil)
 {
-    compil_t *compil = malloc(sizeof(compil_t));
+    size_t i = 0;
 
-    if (!compil)
-        return (NULL);
-    if (!(compil->instr = malloc_instruction(prog_size))) {
-        free(compil);
-        return (NULL);
-    }
-    compil->file = file;
-    compil->prog_size = (size_t)prog_size;
-    compil->nb_label = nb_label;
-    compil->label = label;
+    compil->instr = malloc(sizeof(char) * (compil->prog_size + 1));
+    if (!compil->instr)
+        return ;
     compil->pos = 0;
-    return (compil);
+    while (i <= compil->prog_size)
+        compil->instr[i++] = '\0';
 }
 
-int     write_instruction(char **file, header_t *head, int prog_size,
-int fd)
+int     write_instruction(compil_t *compil, int fd)
 {
     size_t  i = 0;
-    compil_t *compil = init_compil(file, head->label, prog_size,
-head->nb_label);
 
+    init_compil(compil);
     if (!compil)
         return (0);
-    while (file[i]) {
-        if (is_instru(file[i]))
-            compile_instruction(compil, file[i]);
+    while (compil->file[i]) {
+        if (is_instru(compil->file[i]))
+            compile_instruction(compil, compil->file[i]);
         i++;
     }
     write(fd, compil->instr, compil->pos);
