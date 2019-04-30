@@ -37,7 +37,7 @@ line[i + my_strlen(NAME_CMD_STRING)] != '\t'))
         i++;
     if (line[i++] != '\"')
         return (-1);
-    while (line[i] && line[i] != '\"' && j <= PROG_NAME_LENGTH)
+    while (line[i] && line[i] != '\"' && j < PROG_NAME_LENGTH)
         head->prog_name[j++] = line[i++];
     if (!if_end_of_line_is_corect(line, i))
         return (-1);
@@ -62,7 +62,7 @@ my_strlen(COMMENT_CMD_STRING)) || (line[i + my_strlen(COMMENT_CMD_STRING)] !=
         i++;
     if (line[i++] != '\"')
         return (-1);
-    while (line[i] && line[i] != '\"' && j <= COMMENT_LENGTH)
+    while (line[i] && line[i] != '\"' && j < COMMENT_LENGTH)
         head->comment[j++] = line[i++];
     if (!if_end_of_line_is_corect(line, i))
         return (-1);
