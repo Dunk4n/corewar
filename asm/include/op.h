@@ -1,11 +1,8 @@
 /*
-** op.h for  korewar
-**
-** Made by Astek
-** Login   <astek@epitech.net>
-**
-** Started on  Mon Mar 30 11:14:31 2009 Astek
-** Last update Tue Mar 22 16:44:20 2011 Astek
+** EPITECH PROJECT, 2018
+** include/op
+** File description:
+** csfml is the best thing ever
 */
 
 #ifndef _OP_H_
@@ -68,7 +65,8 @@ typedef struct op_s     op_t;
 /*
 ** op_tab
 */
-extern  op_t    op_tab[];
+
+const   op_t    op_tab[];
 
 /*
 ** header
