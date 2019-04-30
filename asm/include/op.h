@@ -66,7 +66,7 @@ typedef struct op_s     op_t;
 ** op_tab
 */
 
-const   op_t    op_tab[];
+const   op_t    op_tab[17];
 
 /*
 ** header
