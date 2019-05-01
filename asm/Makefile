@@ -47,7 +47,7 @@ fclean:
 
 $(NAME): $(OBJ)
 	@$(MAKE) -C lib/my
-	@gcc -o $(NAME) $(OBJ) $(LDFLAGS)
+	@gcc -g -o $(NAME) $(OBJ) $(LDFLAGS)
 
 re:
 	@$(MAKE) fclean

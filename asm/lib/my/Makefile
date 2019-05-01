@@ -63,7 +63,9 @@ SRC	=	my_showmem.c			\
 		my_int_tobase.c			\
 		my_itoa.c			\
 		put_color.c			\
-		get_next_line.c
+		get_next_line.c			\
+		my_memset.c			\
+		my_calloc.c
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -16,7 +16,7 @@ static  int     all_ready_have(char *line, compil_t *compil)
 
     while (line[i] == ' ' || line[i] == '\t' || line[i] == SEPARATOR_CHAR)
         i++;
-    while (line[i + len] && line[i + len] != ':')
+    while (line[i + len] && line[i + len] != LABEL_CHAR)
         len++;
     while (j < compil->nb_label) {
         if (!my_strncmp(compil->label[j].name, line + i, len) &&
@@ -37,16 +37,16 @@ sizeof(label_t) * (compil->nb_label + 1))))
         return (0);
     while (line[i] == ' ' || line[i] == '\t' || line[i] == SEPARATOR_CHAR)
         i++;
-    while (line[i + len] && line[i + len] != ':')
+    while (line[i + len] && line[i + len] != LABEL_CHAR)
         len++;
     if (!(compil->label[compil->nb_label].name = malloc(sizeof(char) *
 (len + 1))))
         return (0);
     compil->label[compil->nb_label].name[len] = '\0';
     len = 0;
-    while (line[i] && line[i] != ':')
+    while (line[i] && line[i] != LABEL_CHAR)
         compil->label[compil->nb_label].name[len++] = line[i++];
-    compil->label[compil->nb_label++].pos = compil->prog_size;
+    compil->label[compil->nb_label++].pos = compil->head.prog_size;
     return (1);
 }
 

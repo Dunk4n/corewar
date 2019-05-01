@@ -1,5 +1,7 @@
 asm/asm
 corewar/corewar
+asm/*.cor
+asm/*.s
 *~
 *.o
 *.a

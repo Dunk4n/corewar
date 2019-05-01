@@ -49,7 +49,7 @@ int     good_name(char c);
 int     check_arg(char *line, int code, header_t *head);
 int     is_label(char *line, compil_t *compil);
 int     is_an_instruction(char *line, header_t *head);
-int     write_head(header_t *head, const char *name, int *fd);
+int     write_head(compil_t *compil, header_t *head, const char *name, int *fd);
 int     write_instruction(compil_t *compil, int fd);
 void    compile_instruction(compil_t *compil, char *line);
 int     get_indice(char *line, size_t len);

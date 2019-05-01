@@ -85,7 +85,7 @@ int     apply_on_nodes(linked_list_t *begin, int (*f)(void *));
 int     apply_on_matching_nodes(linked_list_t *begin, int (*f)(),
 void const *data_ref, int (*cmp)());
 void    add_in_sorted_list(linked_list_t **begin, void *data, int (*cmp)());
-//double  my_getfloat(char const *str);
+double  my_getfloat(char const *str);
 char    *get_next_line(int fd);
 char    *my_strdupcat(char *dest, char const *src);
 char    *my_itoa(int nb);
@@ -93,5 +93,7 @@ int     my_putchare(char c);
 int     my_put_nbre(int nb);
 int     my_putstre(char *str);
 void    put_color(char cd, int bold, int sortie);
+void    my_memset(void  *ptr, char value, size_t size);
+void    *my_calloc(size_t size, char value);
 
 #endif

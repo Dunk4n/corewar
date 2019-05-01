@@ -26,11 +26,11 @@ int     main(int ac, char **av)
         return (84);
     if (!my_strcmp(av[1], "-h"))
         return (flag_h(av[1]));
-    if (!(compil = malloc(sizeof(compil_t))))
+    if (!(compil = my_calloc(sizeof(compil_t), 0)))
         return (84);
     if (!(compil->file = parse_head(av[1], compil)))
         return (84);
-    if (!write_head(&(compil->head), av[1], &fd))
+    if (!write_head(compil, &(compil->head), av[1], &fd))
         return (84);
     if (!write_instruction(compil, fd))
         return (84);

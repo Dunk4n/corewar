@@ -32,7 +32,7 @@ static  void    set_ind(compil_t *compil, char *line, int arg, int pos)
     if (arg == 1)
         sh.nb = my_getnbr(line);
     else
-        sh.nb = pos;
+        sh.nb = get_pos_label(compil, line + 1) - pos;
     compil->instr[compil->pos++] = sh.data[1];
     compil->instr[compil->pos++] = sh.data[0];
 }

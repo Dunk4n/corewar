@@ -50,10 +50,11 @@ S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1) {
     return (fd);
 }
 
-int     write_head(header_t *head, const char *name, int *fd)
+int     write_head(compil_t *compil, header_t *head, const char *name, int *fd)
 {
     int tmp = head->prog_size;
 
+    compil->prog_size = tmp;
     *fd = open_file(name);
     if (*fd == -1)
         return (0);
