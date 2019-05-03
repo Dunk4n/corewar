@@ -9,7 +9,7 @@
 #include <fcntl.h>
 #include "asm.h"
 
-void    free_file(char **file)
+void    free_file(char **file, int fd)
 {
     size_t i = 0;
 
@@ -20,6 +20,7 @@ void    free_file(char **file)
         i++;
     }
     free(file);
+    close(fd);
 }
 
 int     little_endian(int nb)
@@ -51,7 +52,7 @@ char    **parse_head(char const *name, compil_t *compil)
     if (head_or_comment >= 0)
         head_or_comment = check_label(file, compil);
     if (head_or_comment < 0) {
-        free_file(file);
+        free_file(file, fd);
         return (NULL);
     }
     close(fd);

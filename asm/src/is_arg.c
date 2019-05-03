@@ -44,8 +44,8 @@ int     is_ind(char *line)
 
     if (line[0] == LABEL_CHAR)
         return (is_label_arg(line + 1));
-    if (my_getnbr(line) <= 0)
-        return (0);
+    if (line[i] == '-')
+        i++;
     while (line[i] && line[i] != ' ' && line[i] != '\t' && line[i] !=
 COMMENT_CHAR && line[i] != SEPARATOR_CHAR) {
         if (line[i] < '0' || line[i] > '9')
@@ -63,8 +63,8 @@ int     is_dir(char *line)
         return (0);
     if (line[i] == LABEL_CHAR)
         return (is_label_arg(line + i + 1));
-    if (my_getnbr(line + i) < 0)
-        return (0);
+    if (line[i] == '-')
+        i++;
     while (line[i] && line[i] != ' ' && line[i] != '\t' && line[i] !=
 COMMENT_CHAR && line[i] != SEPARATOR_CHAR) {
         if (line[i] < '0' || line[i] > '9')
