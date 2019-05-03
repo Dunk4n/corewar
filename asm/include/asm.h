@@ -59,5 +59,6 @@ int     is_dir(char *line);
 void    set_parameter(compil_t *compil, char *line, int code, int pos);
 int     little_endian(int nb);
 int     check_label(char **file, compil_t *compil);
+long    long    my_getnbr_long(char const *str);
 
 #endif

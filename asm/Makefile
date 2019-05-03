@@ -22,6 +22,7 @@ SRC	=	$(D_SRC)main.c			\
 		$(D_SRC)set_parameter.c		\
 		$(D_SRC)is_arg.c		\
 		$(D_SRC)check_label.c		\
+		$(D_SRC)my_getnbr_long.c	\
 
 OBJ	=	$(SRC:%.c=%.o)
 

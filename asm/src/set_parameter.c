@@ -44,7 +44,7 @@ static  void    set_dir(compil_t *compil, char *line, int arg, int *tab)
 
     if (tab[0] <= 7 || tab[0] == 12) {
         if (arg == 1)
-            data.nb = my_getnbr(line + 1);
+            data.nb = (int)my_getnbr_long(line + 1);
         else
             data.nb = get_pos_label(compil, line + 2) - tab[1];
         compil->instr[compil->pos++] = data.data[3];
