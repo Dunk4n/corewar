@@ -56,7 +56,7 @@ static  void    set_dir(compil_t *compil, char *line, int arg, int *tab)
     if (arg == 1)
         sh.nb = my_getnbr(line + 1);
     else
-        sh.nb = get_pos_label(compil, line + 2) - tab[1];
+        sh.nb = get_pos_label(compil, line + 2) - (tab[1]);
     compil->instr[compil->pos++] = sh.data[1];
     compil->instr[compil->pos++] = sh.data[0];
 }

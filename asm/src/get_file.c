@@ -76,8 +76,8 @@ char    **get_file(int fd, size_t nb, compil_t *compil, int *head_or_comment)
 
     if (*head_or_comment >= 2 && line && bad_instruction(line, compil))
         *head_or_comment = -1;
-    if (*head_or_comment < 2 && *head_or_comment != -1 &&  line)
-        *head_or_comment = (*head_or_comment == 0) ? get_name(&(compil->head),
+    if (*head_or_comment < 2 && *head_or_comment != -1 && line)
+        *head_or_comment = (*head_or_comment < 1) ? get_name(&(compil->head),
 line) : get_comment(&(compil->head), line);
     if (!line || *head_or_comment == -1) {
         if (!(file = malloc(sizeof(char*) * (nb + 1))))

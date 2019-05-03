@@ -54,15 +54,19 @@ static  void    parameter_byte(compil_t *compil, char *line)
     size_t  i = 0;
 
     while (*line && i < MAX_ARGS_NUMBER) {
-        if (!set_byte_parameter(compil, line, i++))
+        if (!set_byte_parameter(compil, line, i++)) {
+            compil->pos += 1;
             return ;
+        }
         while (*line &&
-*line != ' ' && *line != '\t' && *line != SEPARATOR_CHAR)
+                *line != ' ' && *line != '\t' && *line != SEPARATOR_CHAR)
             line++;
         while (*line == ' ' || *line == '\t' || *line == SEPARATOR_CHAR)
             line++;
-        if (*line == COMMENT_CHAR)
+        if (*line == COMMENT_CHAR) {
+            compil->pos += 1;
             return ;
+        }
     }
     compil->pos += 1;
 }
