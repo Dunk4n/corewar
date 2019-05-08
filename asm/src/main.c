@@ -11,9 +11,9 @@
 int     flag_h(char *name)
 {
     my_printf("%s%s", "USAGE\n    ./", name);
-    my_putstr("[.s]\n\nDESCRIPTION\n    file_name\tfile in assembly language to\
- be converted into file_name.cor, an\n\t\texecutable in the Virtual Machaine.\
-\n");
+    my_putstr("[.s]\n\nDESCRIPTION\n    file_name\tfile in assembly language \
+to be converted into file_name.cor, an\n\t\texecutable in the Virtual \
+Machaine.\n");
     return (0);
 }
 
