@@ -36,12 +36,12 @@ typedef char    args_type_t;
 
 struct  op_s
 {
-   char         *mnemonique;
-   char         nbr_args;
-   args_type_t  type[MAX_ARGS_NUMBER];
-   char         code;
-   int          nbr_cycles;
-   char         *comment;
+    char         *mnemonique;
+    char         nbr_args;
+    args_type_t  type[MAX_ARGS_NUMBER];
+    char         code;
+    int          nbr_cycles;
+    char         *comment;
 };
 
 typedef struct op_s     op_t;
@@ -59,10 +59,10 @@ const   op_t    op_tab[17];
 
 struct header_s
 {
-   int  magic;
-   char prog_name[PROG_NAME_LENGTH + 1];
-   int  prog_size;
-   char comment[COMMENT_LENGTH + 1];
+    int  magic;
+    char prog_name[PROG_NAME_LENGTH + 1];
+    int  prog_size;
+    char comment[COMMENT_LENGTH + 1];
 };
 
 typedef struct header_s header_t;
