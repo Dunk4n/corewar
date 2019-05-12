@@ -8,8 +8,6 @@
 #include <stdlib.h>
 #include "asm.h"
 
-const   int     nb_oct[16] = {0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1};
-
 int     good_name(char c)
 {
     size_t i = 0;
@@ -35,7 +33,7 @@ static  int     get_indice_instruction(char *line, header_t *head)
     while (op_tab[i].mnemonique) {
         if (!my_strncmp(op_tab[i].mnemonique, line, len) && (int)len ==
 my_strlen(op_tab[i].mnemonique)) {
-            head->prog_size += 1 + nb_oct[i];
+            head->prog_size += 1 + op_tab[i].oct_parametre;
             return (i);
         }
         i++;

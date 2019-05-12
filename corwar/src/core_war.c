@@ -8,19 +8,18 @@
 #include <stdlib.h>
 #include "corwar.h"
 
-void    (*const instruction[16])(char *map, prog_t *prog, corewar_t *core) =
-{live, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+void    (*const instruction[16])(corewar_t *core, prog_t *prog) =
+{live, ld, st, add, sub, and, or, xor, zjmp, NULL, NULL, NULL, NULL,
 NULL, NULL, NULL};
 
 static  void    one_prog(corewar_t *core, size_t j)
 {
     if (core->prog[j].tmp == 0) {
-        if (core->prog[j].to_exc >= 0 && core->prog[j].to_exc == 0)
-            instruction[core->prog[j].to_exc](core->map, &(core->prog[j]),
-core);
-        core->prog[j].tmp = op_tab[(int)core->map[core->prog[j].pc] - 1].
-nbr_cycles;
+        if (core->prog[j].to_exc >= 0 && instruction[core->prog[j].to_exc]) {
+            instruction[core->prog[j].to_exc](core, &(core->prog[j]));
+        }
         core->prog[j].to_exc = (int)core->map[core->prog[j].pc] - 1;
+        core->prog[j].tmp = op_tab[core->prog[j].to_exc].nbr_cycles - 1;
     }
     core->prog[j].tmp--;
 }
@@ -62,7 +61,11 @@ void    core_war(corewar_t *core)
     size_t  i = 0;
 
     while (core->nb_prog_live > 1 && core->cycle_to_die > 1) {
+        if (i < 100)
+            printf("Tour = %ld\n", i);
         all_prog(core, &to_die);
+        if (i < 100)
+            printf("r3 = %d\n", core->prog[0].reg[2]);
         if (core->nb_live == NBR_LIVE) {
             core->cycle_to_die -= CYCLE_DELTA;
             core->nb_live = 0;

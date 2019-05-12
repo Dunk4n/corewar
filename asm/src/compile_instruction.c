@@ -59,7 +59,7 @@ static  void    parameter_byte(compil_t *compil, char *line)
             return ;
         }
         while (*line &&
-                *line != ' ' && *line != '\t' && *line != SEPARATOR_CHAR)
+*line != ' ' && *line != '\t' && *line != SEPARATOR_CHAR)
             line++;
         while (*line == ' ' || *line == '\t' || *line == SEPARATOR_CHAR)
             line++;
@@ -78,7 +78,7 @@ void    compile_instruction(compil_t *compil, char *line)
     size_t  pos = compil->pos;
 
     code = get_code(compil, &line);
-    if (nb_oct[code])
+    if (op_tab[code].oct_parametre)
         parameter_byte(compil, line);
     set_parameter(compil, line, code, pos);
 }

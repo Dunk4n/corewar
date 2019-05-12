@@ -11,8 +11,6 @@
 #include "my.h"
 #include "op.h"
 
-const   int     nb_oct[16];
-
 typedef union   data_u
 {
     int     nb;

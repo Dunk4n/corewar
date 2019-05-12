@@ -7,12 +7,12 @@
 
 #include "corwar.h"
 
-void    live(char *map, prog_t *prog, corewar_t *core)
+void    live(corewar_t *core, prog_t *prog)
 {
-    prog_t *tmp = &(core->prog[(int)map[(prog->pc + 1) % MEM_SIZE]]);
+    int tab[8] = {0};
 
-    my_printf("The player %d(%s) is alive\n", tmp->nb + 1, tmp->name);
-    tmp->live = 1;
-    prog->pc = (prog->pc + 2) % MEM_SIZE;
-    prog->tmp = op_tab[0].nbr_cycles;
+    prog->pc = (prog->pc + get_arg(core->map, prog->pc, tab)) % MEM_SIZE;
+    core->prog[tab[0]].live = 1;
+    my_printf("The player %d(%s) is alive\n", core->prog[tab[0]].nb + 1,
+core->prog[tab[0]].name);
 }

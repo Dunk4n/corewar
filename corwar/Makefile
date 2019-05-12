@@ -15,8 +15,16 @@ SRC	=	$(D_SRC)main.c			\
 		$(D_SRC)charge_all_cor.c	\
 		$(D_SRC)put_prog.c		\
 		$(D_SRC)core_war.c		\
+		$(D_SRC)get_arg.c		\
 		$(D_SRC)live.c			\
 		$(D_SRC)ld.c			\
+		$(D_SRC)st.c			\
+		$(D_SRC)add.c			\
+		$(D_SRC)sub.c			\
+		$(D_SRC)and.c			\
+		$(D_SRC)or.c			\
+		$(D_SRC)xor.c			\
+		$(D_SRC)zjmp.c			\
 
 OBJ	=	$(SRC:%.c=%.o)
 
