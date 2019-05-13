@@ -57,6 +57,7 @@ char    **charge_all_cor(char **name, size_t size, prog_t **progs);
 void    put_prog(char *map, prog_t *prog, char **instr);
 void    core_war(corewar_t *core);
 int     get_arg(char *map, int pc, int *tab);
+int     get_value_arg(corewar_t *core, prog_t *prog, int value, int type);
 
 /*
 ** instruction
@@ -71,13 +72,13 @@ void    and(corewar_t *core, prog_t *prog);
 void    or(corewar_t *core, prog_t *prog);
 void    xor(corewar_t *core, prog_t *prog);
 void    zjmp(corewar_t *core, prog_t *prog);
-//ldi
-//sti
+void    ldi(corewar_t *core, prog_t *prog);
+void    sti(corewar_t *core, prog_t *prog);
 //fork
-//lld
-//lldi
+void    lld(corewar_t *core, prog_t *prog);
+void    lldi(corewar_t *core, prog_t *prog);
 //lfork
-//aff
+void    aff(corewar_t *core, prog_t *prog);
 
 /*
 ** bonus

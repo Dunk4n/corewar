@@ -16,6 +16,7 @@ SRC	=	$(D_SRC)main.c			\
 		$(D_SRC)put_prog.c		\
 		$(D_SRC)core_war.c		\
 		$(D_SRC)get_arg.c		\
+		$(D_SRC)get_value_arg.c		\
 		$(D_SRC)live.c			\
 		$(D_SRC)ld.c			\
 		$(D_SRC)st.c			\
@@ -25,6 +26,11 @@ SRC	=	$(D_SRC)main.c			\
 		$(D_SRC)or.c			\
 		$(D_SRC)xor.c			\
 		$(D_SRC)zjmp.c			\
+		$(D_SRC)ldi.c			\
+		$(D_SRC)sti.c			\
+		$(D_SRC)lld.c			\
+		$(D_SRC)lldi.c			\
+		$(D_SRC)aff.c			\
 
 OBJ	=	$(SRC:%.c=%.o)
 

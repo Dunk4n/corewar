@@ -19,8 +19,8 @@ void    st(corewar_t *core, prog_t *prog)
     if (tab[5] != 3)
         return ;
     data.nb = prog->reg[tab[0] % REG_NUMBER];
-    core->map[(tmp + tab[1]) % IDX_MOD] = data.data[3];
-    core->map[(tmp + tab[1] + 1) % IDX_MOD] = data.data[2];
-    core->map[(tmp + tab[1] + 2) % IDX_MOD] = data.data[1];
-    core->map[(tmp + tab[1] + 3) % IDX_MOD] = data.data[0];
+    core->map[((tmp + tab[1]) % IDX_MOD) % MEM_SIZE] = data.data[3];
+    core->map[((tmp + tab[1] + 1) % IDX_MOD) % MEM_SIZE] = data.data[2];
+    core->map[((tmp + tab[1] + 2) % IDX_MOD) % MEM_SIZE] = data.data[1];
+    core->map[((tmp + tab[1] + 3) % IDX_MOD) % MEM_SIZE] = data.data[0];
 }

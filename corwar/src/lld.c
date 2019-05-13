@@ -1,13 +1,13 @@
 /*
 ** EPITECH PROJECT, 2019
-** src/ld
+** src/lld
 ** File description:
-** don't forget to free at the end
+** https://github.com/x4m3/vim-epitech
 */
 
 #include "corwar.h"
 
-void    ld(corewar_t *core, prog_t *prog)
+void    lld(corewar_t *core, prog_t *prog)
 {
     int     tab[8] = {0};
     int     tmp = prog->pc;
@@ -19,9 +19,9 @@ void    ld(corewar_t *core, prog_t *prog)
         prog->reg[tab[1] % REG_NUMBER] = tab[0];
     if (tab[4] != 3)
         return ;
-    data.data[3] = core->map[((tmp + tab[0]) % IDX_MOD) % MEM_SIZE];
-    data.data[2] = core->map[((tmp + tab[0] + 1) % IDX_MOD) % MEM_SIZE];
-    data.data[1] = core->map[((tmp + tab[0] + 2) % IDX_MOD) % MEM_SIZE];
-    data.data[0] = core->map[((tmp + tab[0] + 3) % IDX_MOD) % MEM_SIZE];
+    data.data[3] = core->map[(tmp + tab[0]) % MEM_SIZE];
+    data.data[2] = core->map[(tmp + tab[0] + 1) % MEM_SIZE];
+    data.data[1] = core->map[(tmp + tab[0] + 2) % MEM_SIZE];
+    data.data[0] = core->map[(tmp + tab[0] + 3) % MEM_SIZE];
     prog->reg[tab[1] % REG_NUMBER] = data.nb;
 }
