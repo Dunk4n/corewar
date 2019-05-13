@@ -61,6 +61,7 @@ int     get_arg(char *map, int pc, int *tab);
 int     get_value_arg(corewar_t *core, prog_t *prog, int value, int type);
 int     get_nb(corewar_t *core);
 void    copy_prog(char *map, prog_t *a, prog_t *b);
+void    dump(corewar_t *core);
 
 /*
 ** instruction

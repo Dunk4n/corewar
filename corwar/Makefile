@@ -9,8 +9,7 @@ D_SRC	=	./src/
 D_INC	=	./include/
 D_LIB	=	./lib/my/
 
-SRC	=	$(D_SRC)main.c			\
-		$(D_SRC)op.c			\
+SRC	=	$(D_SRC)op.c			\
 		$(D_SRC)charge_cor.c		\
 		$(D_SRC)charge_all_cor.c	\
 		$(D_SRC)put_prog.c		\
@@ -33,6 +32,8 @@ SRC	=	$(D_SRC)main.c			\
 		$(D_SRC)lldi.c			\
 		$(D_SRC)lfork.c			\
 		$(D_SRC)aff.c			\
+		$(D_SRC)dump.c			\
+		$(D_SRC)main.c
 
 OBJ	=	$(SRC:%.c=%.o)
 
