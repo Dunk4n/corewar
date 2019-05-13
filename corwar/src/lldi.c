@@ -23,5 +23,5 @@ get_value_arg(core, prog, tab[1], tab[5]);
     data.data[1] = core->map[(prog->pc + s + 2) % MEM_SIZE];
     data.data[0] = core->map[(prog->pc + s + 3) % MEM_SIZE];
     prog->reg[tab[2] % REG_NUMBER] = data.nb;
-    prog->pc += tmp;
+    prog->pc = tmp;
 }

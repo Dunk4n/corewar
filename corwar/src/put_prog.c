@@ -19,7 +19,6 @@ void    put_prog(char *map, prog_t *prog, char **instr)
             map[(prog[i].pc + j) % MEM_SIZE] = instr[i][j];
             j++;
         }
-        free(instr[i]);
         i++;
     }
     free(instr);

@@ -40,6 +40,7 @@ typedef struct  prog_s
     int         live;
     int         to_exc;
     char        name[PROG_NAME_LENGTH + 1];
+    char        *instr;
 }               prog_t;
 
 typedef struct  corewar_s
@@ -58,6 +59,8 @@ void    put_prog(char *map, prog_t *prog, char **instr);
 void    core_war(corewar_t *core);
 int     get_arg(char *map, int pc, int *tab);
 int     get_value_arg(corewar_t *core, prog_t *prog, int value, int type);
+int     get_nb(corewar_t *core);
+void    copy_prog(char *map, prog_t *a, prog_t *b);
 
 /*
 ** instruction
@@ -74,10 +77,10 @@ void    xor(corewar_t *core, prog_t *prog);
 void    zjmp(corewar_t *core, prog_t *prog);
 void    ldi(corewar_t *core, prog_t *prog);
 void    sti(corewar_t *core, prog_t *prog);
-//fork
+void    my_fork(corewar_t *core, prog_t *prog);
 void    lld(corewar_t *core, prog_t *prog);
 void    lldi(corewar_t *core, prog_t *prog);
-//lfork
+void    lfork(corewar_t *core, prog_t *prog);
 void    aff(corewar_t *core, prog_t *prog);
 
 /*

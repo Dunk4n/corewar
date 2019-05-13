@@ -28,8 +28,10 @@ SRC	=	$(D_SRC)main.c			\
 		$(D_SRC)zjmp.c			\
 		$(D_SRC)ldi.c			\
 		$(D_SRC)sti.c			\
+		$(D_SRC)fork.c			\
 		$(D_SRC)lld.c			\
 		$(D_SRC)lldi.c			\
+		$(D_SRC)lfork.c			\
 		$(D_SRC)aff.c			\
 
 OBJ	=	$(SRC:%.c=%.o)

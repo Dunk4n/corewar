@@ -22,5 +22,5 @@ get_value_arg(core, prog, tab[2], tab[6]);
     core->map[((prog->pc + s + 1) % IDX_MOD) % MEM_SIZE] = data.data[2];
     core->map[((prog->pc + s + 2) % IDX_MOD) % MEM_SIZE] = data.data[1];
     core->map[((prog->pc + s + 3) % IDX_MOD) % MEM_SIZE] = data.data[0];
-    prog->pc += tmp;
+    prog->pc = tmp;
 }

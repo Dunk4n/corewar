@@ -26,9 +26,9 @@ are MEM_SIZE modulo\n");
 
 int     main(int ac, char **av)
 {
-    char    *name[2] = {"zork.cor", "pdd.cor"};
-    corewar_t core;
-    char    **instr;
+    char        *name[2] = {"zork.cor", "42.cor"};
+    corewar_t   core;
+    char        **instr;
 
     if (ac == 2 && my_strcmp(av[1], "-h"))
         return (flag_h(av[1]));

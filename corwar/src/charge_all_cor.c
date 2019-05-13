@@ -9,14 +9,15 @@
 #include <stdlib.h>
 #include "corwar.h"
 
-static  void    free_all_cor(char **instr, prog_t *progs, size_t nb)
+static  void    *free_all_cor(char **instr, prog_t *progs, size_t nb)
 {
     free(progs);
     if (!instr)
-        return ;
+        return (NULL);
     while (nb-- > 0)
         free(instr[nb]);
     free(instr);
+    return (NULL);
 }
 
 void    set_reg(prog_t *prog)
@@ -48,10 +49,9 @@ char    **charge_all_cor(char **name, size_t size, prog_t **progs)
     instr[size] = NULL;
     while (i < size) {
         instr[i] = charge_cor(name[i], &((*progs)[i]));
-        if (!instr[i]) {
-            free_all_cor(instr, *progs, i);
-            return (NULL);
-        }
+        if (!instr[i])
+            return (free_all_cor(instr, *progs, i));
+        (*progs)[i].instr = instr[i];
         (*progs)[i].nb = i;
         (*progs)[i].pc = (int)i * MEM_SIZE / size;
         set_reg(&((*progs)[i++]));
