@@ -50,11 +50,11 @@ void    my_fork(corewar_t *core, prog_t *prog)
 
     tmp = (get_arg(core->map, prog->pc, tab) + 1);
     error = realloc(core->prog, core->nb_prog + 1);
-    if (!core->prog) {
+    if (!error) {
+        free(core->prog);
         core->segfault = 1;
         return ;
     }
-    core->prog = error;
     core->prog[core->nb_prog].nb = get_nb(core);
     core->nb_prog++;
     core->prog[core->nb_prog - 1].pc = (prog->pc + tab[0] % IDX_MOD) % MEM_SIZE;
