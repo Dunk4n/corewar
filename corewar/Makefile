@@ -37,7 +37,7 @@ SRC	=	$(D_SRC)op.c			\
 
 OBJ	=	$(SRC:%.c=%.o)
 
-NAME	=	corwar
+NAME	=	corewar
 
 CFLAGS	=	-W -Wall -Wextra -I$(D_INC) -g
 

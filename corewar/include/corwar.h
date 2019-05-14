@@ -67,6 +67,7 @@ int     get_value_arg_long(corewar_t *core, prog_t *prog, int value, int type);
 int     get_nb(corewar_t *core);
 void    copy_prog(char *map, prog_t *a, prog_t *b);
 void    dump(corewar_t *core);
+void    my_memcpy(void *a, void *b, size_t size);
 
 /*
 ** instruction
