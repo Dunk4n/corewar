@@ -60,4 +60,5 @@ void    my_fork(corewar_t *core, prog_t *prog)
     core->prog[core->nb_prog - 1].pc = (prog->pc + tab[0] % IDX_MOD) % MEM_SIZE;
     copy_prog(core->map, &(core->prog[core->nb_prog - 1]), prog);
     prog->pc = (prog->pc + tmp) % MEM_SIZE;
+    core->nb_prog_live++;
 }

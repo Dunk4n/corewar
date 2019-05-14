@@ -23,8 +23,8 @@ static  void    one_prog(corewar_t *core, size_t j)
 {
     if (core->prog[j].tmp == 0) {
         if (core->prog[j].to_exc >= 0 && core->prog[j].to_exc < 16) {
-//            printf("nb = %ld(%s), exec = %d, tour = %ld\n",
-//core->prog[j].nb + 1, core->prog[j].name, core->prog[j].to_exc, glob + 1);
+            printf("nb = %ld(%s), exec = %d, tour = %ld\n",
+core->prog[j].nb + 1, core->prog[j].name, core->prog[j].to_exc, glob + 1);
             instruction[core->prog[j].to_exc](core, &(core->prog[j]));
             core->prog[j].tmp = 1;
             core->prog[j].to_exc = -1;
@@ -32,9 +32,9 @@ static  void    one_prog(corewar_t *core, size_t j)
         else {
             core->prog[j].to_exc = (int)core->map[core->prog[j].pc] - 1;
             core->prog[j].tmp = op_tab[core->prog[j].to_exc].nbr_cycles - 1;
-//            printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ nb = %ld(%s), exec = %d, \
-//ici = %d, tour = %ld\n", core->prog[j].nb + 1, core->prog[j].name,
-//core->prog[j].to_exc, core->prog[j].pc, glob + 1);
+            printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ nb = %ld(%s), exec = %d, \
+ici = %d, tour = %ld\n", core->prog[j].nb + 1, core->prog[j].name,
+core->prog[j].to_exc, core->prog[j].pc, glob + 1);
         }
     }
     core->prog[j].tmp--;
@@ -46,7 +46,8 @@ static  void    all_prog(corewar_t *core, size_t *to_die)
 
     while (!core->segfault && core->nb_prog_live > 1 && j < core->nb_prog) {
         (core->prog[j].tmp >= 0) ? one_prog(core, j) : 0;
-        if (*to_die >= core->cycle_to_die && core->prog[j].live != 1) {
+        if (core->prog[j].tmp >= 0 && *to_die >= core->cycle_to_die &&
+core->prog[j].live != 1) {
             core->prog[j].tmp = -1;
             core->nb_prog_live--;
         }

@@ -26,7 +26,7 @@ are MEM_SIZE modulo\n");
 
 int     main(int ac, char **av)
 {
-    char        *name[2] = {"octobre.cor", "42.cor"};
+    char        *name[2] = {"42.cor", "octobre.cor"};
     corewar_t   core;
     char        **instr;
 

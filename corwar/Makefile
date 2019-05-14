@@ -39,7 +39,7 @@ OBJ	=	$(SRC:%.c=%.o)
 
 NAME	=	corwar
 
-CFLAGS	=	-W -Wall -Wextra -I$(D_INC)
+CFLAGS	=	-W -Wall -Wextra -I$(D_INC) -g
 
 LDFLAGS	=	-L$(D_LIB) -lmy
 
