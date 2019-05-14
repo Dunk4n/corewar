@@ -11,10 +11,10 @@
 int     get_nb(corewar_t *core)
 {
     size_t i = 0;
-    size_t tmp = -1;
+    int tmp = -1;
 
-    while (core->nb_prog) {
-        if (core->prog[i].nb > tmp)
+    while (i < core->nb_prog) {
+        if ((int)core->prog[i].nb > tmp)
             tmp = core->prog[i].nb;
         i++;
     }
@@ -46,13 +46,18 @@ void    my_fork(corewar_t *core, prog_t *prog)
 {
     int     tab[8] = {0};
     int     tmp = prog->pc;
+    prog_t  *error;
 
-    tmp = (prog->pc + get_arg(core->map, prog->pc, tab)) % MEM_SIZE;
+    tmp = (get_arg(core->map, prog->pc, tab) + 1);
+    error = realloc(core->prog, core->nb_prog + 1);
+    if (!core->prog) {
+        core->segfault = 1;
+        return ;
+    }
+    core->prog = error;
+    core->prog[core->nb_prog].nb = get_nb(core);
     core->nb_prog++;
-    core->prog = realloc(core->prog, core->nb_prog);
-    core->prog[core->nb_prog - 1].nb = get_nb(core);
-    core->prog[core->nb_prog - 1].pc = ((prog->pc + tab[0]) % IDX_MOD)
-% MEM_SIZE;
+    core->prog[core->nb_prog - 1].pc = (prog->pc + tab[0] % IDX_MOD) % MEM_SIZE;
     copy_prog(core->map, &(core->prog[core->nb_prog - 1]), prog);
-    prog->pc = tmp;
+    prog->pc = (prog->pc + tmp) % MEM_SIZE;
 }

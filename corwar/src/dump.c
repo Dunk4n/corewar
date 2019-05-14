@@ -25,7 +25,7 @@ static void print_padding(size_t i)
 
 static void display_dump_line(corewar_t *core, size_t i)
 {
-    char *str = convert_base(my_itoa(core->map[i]), DEC, HEX);
+    char *str = convert_base(my_itoa((unsigned char)core->map[i]), DEC, HEX);
     size_t len = (size_t)my_strlen(str);
 
     if (len == 0) {

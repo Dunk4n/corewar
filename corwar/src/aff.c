@@ -11,6 +11,6 @@ void    aff(corewar_t *core, prog_t *prog)
 {
     int     tab[8] = {0};
 
-    prog->pc = (prog->pc + get_arg(core->map, prog->pc, tab)) % MEM_SIZE;
+    prog->pc = (prog->pc + get_arg(core->map, prog->pc, tab) + 1) % MEM_SIZE;
     my_putchar(prog->reg[tab[0] % REG_NUMBER] % 256);
 }

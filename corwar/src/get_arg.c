@@ -24,7 +24,7 @@ static  int     get_short(char *map, int pc)
 
     data.data[0] = map[pc];
     data.data[1] = map[pc + 1];
-    return (REVERSE_SHORT(data.nb));
+    return ((short)REVERSE_SHORT(data.nb));
 }
 
 static  int     get_one_param(char *map, int pc, int *tab, char *instr)

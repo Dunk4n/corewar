@@ -17,6 +17,9 @@
 #define REVERSE_SHORT(n) ((unsigned short) (((n & 0xFF) << 8) | \
 ((n & 0xFF00) >> 8)))
 
+#define DEC "0123456789"
+#define HEX "0123456789abcdef"
+
 typedef union   data_u
 {
     int     nb;
@@ -51,6 +54,7 @@ typedef struct  corewar_s
     size_t      cycle_to_die;
     size_t      nb_live;
     size_t      nb_prog_live;
+    size_t      segfault;
 }               corewar_t;
 
 char    *charge_cor(char *name, prog_t *prog);
@@ -59,6 +63,7 @@ void    put_prog(char *map, prog_t *prog, char **instr);
 void    core_war(corewar_t *core);
 int     get_arg(char *map, int pc, int *tab);
 int     get_value_arg(corewar_t *core, prog_t *prog, int value, int type);
+int     get_value_arg_long(corewar_t *core, prog_t *prog, int value, int type);
 int     get_nb(corewar_t *core);
 void    copy_prog(char *map, prog_t *a, prog_t *b);
 void    dump(corewar_t *core);

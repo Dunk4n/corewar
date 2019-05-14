@@ -26,7 +26,7 @@ are MEM_SIZE modulo\n");
 
 int     main(int ac, char **av)
 {
-    char        *name[2] = {"zork.cor", "42.cor"};
+    char        *name[2] = {"octobre.cor", "42.cor"};
     corewar_t   core;
     char        **instr;
 
@@ -41,8 +41,11 @@ int     main(int ac, char **av)
     core.nb_prog = 2;
     core.cycle_to_die = CYCLE_TO_DIE;
     core.nb_live = 0;
+    core.segfault = 0;
     core.nb_prog_live = core.nb_prog;
     put_prog(core.map, core.prog, instr);
     core_war(&core);
+    if (core.segfault)
+        return (84);
     return(0);
 }
