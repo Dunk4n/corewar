@@ -20,7 +20,7 @@
 #define MODU(x) ((x < 0) ? (x % MEM_SIZE + MEM_SIZE) % MEM_SIZE : x % MEM_SIZE)
 
 #define DEC "0123456789"
-#define HEX "0123456789abcdef"
+#define HEX "0123456789ABCDEF"
 
 typedef union   data_u
 {
@@ -71,6 +71,7 @@ int     get_value_arg_long(corewar_t *core, prog_t *prog, int value, int type);
 int     get_nb(corewar_t *core);
 void    dump(corewar_t *core);
 void    put_fork_in_memory(corewar_t *core, int arg, prog_t *a, prog_t *b);
+int     dump(corewar_t *core);
 
 /*
 ** instruction
