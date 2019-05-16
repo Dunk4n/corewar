@@ -28,10 +28,11 @@ char *convert_base(char const *nbr, char const *base_from, char const *base_to)
 {
     long    nb = my_getnbr_base(nbr, base_from);
     int     neg = 1;
-    char    *tab;
     int     j = sizetab(nb, base_to);
+    char    *tab = tab = malloc((sizeof(char)) * j + 2);
 
-    tab = malloc(j + 2);
+    if (tab == NULL)
+        return NULL;
     if (nb < 0) {
         neg *= -1;
         tab[j + 1] = '\0';
