@@ -37,7 +37,8 @@ sizeof(label_t) * (compil->nb_label + 1))))
         return (0);
     while (line[i] == ' ' || line[i] == '\t' || line[i] == SEPARATOR_CHAR)
         i++;
-    while (line[i + len] && line[i + len] != LABEL_CHAR)
+    while (line[i + len] && line[i + len] != LABEL_CHAR &&
+line[i + len] != COMMENT_CHAR)
         len++;
     if (!(compil->label[compil->nb_label].name = malloc(sizeof(char) *
 (len + 1))))
@@ -65,12 +66,12 @@ int     is_label(char *line, compil_t *compil)
         return (0);
     i++;
     if (!set_label(line, compil) || (line[i] && line[i] != ' ' &&
-line[i] != '\t' && line[i] != SEPARATOR_CHAR))
+line[i] != '\t' && line[i] != SEPARATOR_CHAR && line[i] != COMMENT_CHAR))
         return (0);
     while (line[i] == ' ' || line[i] == '\t' ||
 line[i] == SEPARATOR_CHAR)
         i++;
-    if (line[i])
+    if (line[i] != COMMENT_CHAR && line[i])
         return (is_an_instruction(line + i, &(compil->head)) == 1);
     return (1);
 }

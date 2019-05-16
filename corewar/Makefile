@@ -13,7 +13,7 @@ SRC	=	$(D_SRC)op.c			\
 		$(D_SRC)charge_cor.c		\
 		$(D_SRC)charge_all_cor.c	\
 		$(D_SRC)put_prog.c		\
-		$(D_SRC)core_war.c		\
+		$(D_SRC)corewar.c		\
 		$(D_SRC)get_arg.c		\
 		$(D_SRC)get_value_arg.c		\
 		$(D_SRC)live.c			\

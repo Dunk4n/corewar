@@ -51,9 +51,10 @@ char    **charge_all_cor(char **name, size_t size, prog_t **progs)
         instr[i] = charge_cor(name[i], &((*progs)[i]));
         if (!instr[i])
             return (free_all_cor(instr, *progs, i));
-        (*progs)[i].instr = instr[i];
         (*progs)[i].nb = i;
+        (*progs)[i].daron = i;
         (*progs)[i].pc = (int)i * MEM_SIZE / size;
+        (*progs)[i].start = (*progs)[i].pc;
         set_reg(&((*progs)[i++]));
     }
     return (instr);

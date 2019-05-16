@@ -15,5 +15,5 @@ void    zjmp(corewar_t *core, prog_t *prog)
     prog->pc = (prog->pc + get_arg(core->map, prog->pc, tab) + 1) % MEM_SIZE;
     if (!prog->carry)
         return ;
-    prog->pc = (tmp + tab[0] % IDX_MOD) % MEM_SIZE;
+    prog->pc = MODU(tmp + tab[0] % IDX_MOD);
 }

@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "corwar.h"
 
-void    put_prog(char *map, prog_t *prog, char **instr)
+void    put_prog(char *map, int *who, prog_t *prog, char **instr)
 {
     size_t i = 0;
     size_t j;
@@ -17,6 +17,7 @@ void    put_prog(char *map, prog_t *prog, char **instr)
         j = 0;
         while (j < prog[i].size) {
             map[(prog[i].pc + j) % MEM_SIZE] = instr[i][j];
+            who[(prog[i].pc + j) % MEM_SIZE] = prog[i].nb;
             j++;
         }
         i++;

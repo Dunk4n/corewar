@@ -17,6 +17,8 @@
 #define REVERSE_SHORT(n) ((unsigned short) (((n & 0xFF) << 8) | \
 ((n & 0xFF00) >> 8)))
 
+#define MODU(x) ((x < 0) ? (x % MEM_SIZE + MEM_SIZE) % MEM_SIZE : x % MEM_SIZE)
+
 #define DEC "0123456789"
 #define HEX "0123456789abcdef"
 
@@ -35,7 +37,9 @@ typedef union   short_u
 typedef struct  prog_s
 {
     size_t      nb;
+    size_t      daron;
     size_t      size;
+    size_t      start;
     int         tmp;
     int         reg[REG_NUMBER];
     int         carry;
@@ -43,31 +47,30 @@ typedef struct  prog_s
     int         live;
     int         to_exc;
     char        name[PROG_NAME_LENGTH + 1];
-    char        *instr;
 }               prog_t;
 
 typedef struct  corewar_s
 {
     prog_t      *prog;
     size_t      nb_prog;
-    char        *map;
-    size_t      cycle_to_die;
-    size_t      nb_live;
-    size_t      nb_prog_live;
+    char        map[MEM_SIZE];
+    int         who[MEM_SIZE];
+    int         cycle_to_die;
+    int         nb_live;
     size_t      segfault;
+    size_t      nb_prog_live;
 }               corewar_t;
 
 char    *charge_cor(char *name, prog_t *prog);
 char    **charge_all_cor(char **name, size_t size, prog_t **progs);
-void    put_prog(char *map, prog_t *prog, char **instr);
-void    core_war(corewar_t *core);
+void    put_prog(char *map, int *who, prog_t *prog, char **instr);
+void    corewar(corewar_t *core);
 int     get_arg(char *map, int pc, int *tab);
 int     get_value_arg(corewar_t *core, prog_t *prog, int value, int type);
 int     get_value_arg_long(corewar_t *core, prog_t *prog, int value, int type);
 int     get_nb(corewar_t *core);
-void    copy_prog(char *map, prog_t *a, prog_t *b);
 void    dump(corewar_t *core);
-void    my_memcpy(void *a, void *b, size_t size);
+void    put_fork_in_memory(corewar_t *core, int arg, prog_t *a, prog_t *b);
 
 /*
 ** instruction
