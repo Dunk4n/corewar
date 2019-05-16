@@ -18,7 +18,7 @@
 ((n & 0xFF00) >> 8)))
 
 #define DEC "0123456789"
-#define HEX "0123456789abcdef"
+#define HEX "0123456789ABCDEF"
 
 typedef union   data_u
 {
@@ -66,7 +66,7 @@ int     get_value_arg(corewar_t *core, prog_t *prog, int value, int type);
 int     get_value_arg_long(corewar_t *core, prog_t *prog, int value, int type);
 int     get_nb(corewar_t *core);
 void    copy_prog(char *map, prog_t *a, prog_t *b);
-void    dump(corewar_t *core);
+int     dump(corewar_t *core);
 void    my_memcpy(void *a, void *b, size_t size);
 
 /*
