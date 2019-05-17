@@ -17,10 +17,13 @@
 #define REVERSE_SHORT(n) ((unsigned short) (((n & 0xFF) << 8) | \
 ((n & 0xFF00) >> 8)))
 
-#define MODU(x) ((x < 0) ? (x % MEM_SIZE + MEM_SIZE) % MEM_SIZE : x % MEM_SIZE)
+#define MODU(x) ((x < 0) ? ((x) % MEM_SIZE + MEM_SIZE) % MEM_SIZE : \
+(x) % MEM_SIZE)
 
 #define DEC "0123456789"
 #define HEX "0123456789ABCDEF"
+
+#define NB_INSTR 25
 
 typedef union   data_u
 {
@@ -57,7 +60,7 @@ typedef struct  corewar_s
     int         who[MEM_SIZE];
     int         cycle_to_die;
     int         nb_live;
-    size_t      segfault;
+    int         segfault;
     size_t      nb_prog_live;
 }               corewar_t;
 
@@ -69,7 +72,6 @@ int     get_arg(char *map, int pc, int *tab);
 int     get_value_arg(corewar_t *core, prog_t *prog, int value, int type);
 int     get_value_arg_long(corewar_t *core, prog_t *prog, int value, int type);
 int     get_nb(corewar_t *core);
-void    dump(corewar_t *core);
 void    put_fork_in_memory(corewar_t *core, int arg, prog_t *a, prog_t *b);
 int     dump(corewar_t *core);
 
@@ -98,6 +100,14 @@ void    aff(corewar_t *core, prog_t *prog);
 ** bonus
 */
 
-//bitwise not
+void    not(corewar_t *core, prog_t *prog);
+void    rsht(corewar_t *core, prog_t *prog);
+void    lsht(corewar_t *core, prog_t *prog);
+//F: multiplication
+//F: division
+//F: modulo
+void    my_rand(corewar_t *core, prog_t *prog);
+void    die(corewar_t *core, prog_t *prog);
+void    kill(corewar_t *core, prog_t *prog);
 
 #endif

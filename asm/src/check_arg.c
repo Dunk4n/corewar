@@ -18,7 +18,7 @@ static  int     good_arg(char *line, int code, int nb_arg, header_t *head)
     }
     if (is_dir(line)) {
         tmp = 2;
-        head->prog_size += (code <= 7 || code == 12) ? DIR_SIZE : 2;
+        head->prog_size += op_tab[code].dir_size;
     }
     if (is_ind(line)) {
         tmp = 4;

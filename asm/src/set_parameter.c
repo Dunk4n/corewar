@@ -42,7 +42,7 @@ static  void    set_dir(compil_t *compil, char *line, int arg, int *tab)
     short_t sh;
     data_t  data;
 
-    if (tab[0] <= 7 || tab[0] == 12) {
+    if (op_tab[tab[0]].dir_size == 4) {
         if (arg == 1)
             data.nb = (int)my_getnbr_long(line + 1);
         else

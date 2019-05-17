@@ -1,13 +1,13 @@
 /*
 ** EPITECH PROJECT, 2019
-** src/live
+** src/kill
 ** File description:
-** C-x C-c
+** hello world?
 */
 
 #include "corwar.h"
 
-void    live(corewar_t *core, prog_t *prog)
+void    kill(corewar_t *core, prog_t *prog)
 {
     int tab[8] = {0};
 
@@ -18,9 +18,7 @@ void    live(corewar_t *core, prog_t *prog)
 core->nb_prog].live == -1)
         return ;
     core->prog[core->prog[tab[0] % core->nb_prog].daron %
-core->nb_prog].live = 1;
-    my_printf("The player %d(%s) is alive\n", core->prog[tab[0] %
-core->nb_prog].daron + 1, core->prog[core->prog[tab[0] % core->nb_prog].daron %
-core->nb_prog].name);
-    core->nb_live++;
+core->nb_prog].live = -1;
+    core->prog[core->prog[tab[0] % core->nb_prog].daron %
+core->nb_prog].tmp = -1;
 }

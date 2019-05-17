@@ -31,18 +31,14 @@ static int print_padding(size_t i)
     return 0;
 }
 
-static void execptionell_print(size_t len, char *str, char *mem)
+static void execptionell_print(size_t len, char *str)
 {
     if (len == 0) {
         my_putstr("00 ");
-        free_all(str, mem);
-        return;
     } else if (len == 1) {
         my_putchar('0');
         my_putchar(str[0]);
         my_putchar(' ');
-        free_all(str, mem);
-        return;
     } else
         return;
 }
@@ -55,7 +51,7 @@ static int display_dump_line(corewar_t *core, size_t i)
 
     if (mem == NULL || str == NULL)
         return 84;
-    execptionell_print(len, str, mem);
+    execptionell_print(len, str);
     for (size_t u = 0; str[u]; u++) {
         my_putchar(str[u]);
         if (u % 2 != 0)

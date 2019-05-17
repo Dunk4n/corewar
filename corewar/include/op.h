@@ -52,7 +52,7 @@ typedef struct op_s     op_t;
 # define DIR_SIZE 4
 # define REG_SIZE DIR_SIZE
 
-const   op_t    op_tab[17];
+const   op_t    op_tab[26];
 
 # define PROG_NAME_LENGTH 128
 # define COMMENT_LENGTH 2048

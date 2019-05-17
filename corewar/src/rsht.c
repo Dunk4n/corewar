@@ -1,13 +1,13 @@
 /*
 ** EPITECH PROJECT, 2019
-** src/or
+** src/rsht
 ** File description:
-** check your malloc!
+** code on paper!
 */
 
 #include "corwar.h"
 
-void    or(corewar_t *core, prog_t *prog)
+void    rsht(corewar_t *core, prog_t *prog)
 {
     int     tab[8] = {0};
 
@@ -17,8 +17,8 @@ void    or(corewar_t *core, prog_t *prog)
 tab[2] < 0 || tab[2] >= REG_NUMBER || tab[6] != 1)
         return ;
     prog->carry = 0;
-    prog->reg[tab[2] % REG_NUMBER] = get_value_arg(core, prog, tab[0], tab[4]) |
-get_value_arg(core, prog, tab[1], tab[5]);
+    prog->reg[tab[2] % REG_NUMBER] = get_value_arg(core, prog, tab[0], tab[4])
+>> get_value_arg(core, prog, tab[1], tab[5]);
     if (!prog->reg[tab[2] % REG_NUMBER])
         prog->carry = 1;
 }

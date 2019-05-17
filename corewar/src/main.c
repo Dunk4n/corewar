@@ -35,18 +35,15 @@ void    set_value(corewar_t *core)
 
 int     malloc_start(corewar_t *core, char ***instr)
 {
-    char        *name[2] = {"octobre.cor", "octobre.cor"};
+    char        *name[2] = {"42.cor", "octobre.cor"};
     size_t      i = 0;
 
     while (i < MEM_SIZE) {
         core->map[i] = 0;
         core->who[i++] = -1;
     }
-    if (!(*instr = charge_all_cor(name, 2, &(core->prog)))) {
-        free(core->map);
-        free(core->who);
+    if (!(*instr = charge_all_cor(name, 2, &(core->prog))))
         return (84);
-    }
     return (0);
 }
 

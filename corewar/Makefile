@@ -32,6 +32,12 @@ SRC	=	$(D_SRC)op.c			\
 		$(D_SRC)lldi.c			\
 		$(D_SRC)lfork.c			\
 		$(D_SRC)aff.c			\
+		$(D_SRC)not.c			\
+		$(D_SRC)rsht.c			\
+		$(D_SRC)lsht.c			\
+		$(D_SRC)rand.c			\
+		$(D_SRC)die.c			\
+		$(D_SRC)kill.c			\
 		$(D_SRC)dump.c			\
 		$(D_SRC)main.c
 

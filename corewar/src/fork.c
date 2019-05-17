@@ -21,7 +21,7 @@ int     get_nb(corewar_t *core)
     return (tmp + 1);
 }
 
-static  void    copy_prog(corewar_t *core, int *tab, prog_t *a, prog_t *b)
+static  void    copy_prog(int *tab, prog_t *a, prog_t *b)
 {
     size_t i = 1;
 
@@ -53,5 +53,5 @@ void    my_fork(corewar_t *core, prog_t *prog)
     core->prog[core->nb_prog].nb = get_nb(core);
     core->prog[core->nb_prog].pc = MODU(tmp + tab[0] % IDX_MOD);
     core->nb_prog++;
-    copy_prog(core, tab, &(core->prog[core->nb_prog - 1]), &(core->prog[ind]));
+    copy_prog(tab, &(core->prog[core->nb_prog - 1]), &(core->prog[ind]));
 }

@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "corwar.h"
 
-static  void    long_copy_prog(corewar_t *core, int *tab, prog_t *a, prog_t *b)
+static  void    long_copy_prog(int *tab, prog_t *a, prog_t *b)
 {
     size_t i = 1;
 
@@ -39,6 +39,6 @@ void    lfork(corewar_t *core, prog_t *prog)
     core->prog[core->nb_prog].nb = get_nb(core);
     core->prog[core->nb_prog].pc = MODU(core->prog[ind].pc + tab[0]);
     core->nb_prog++;
-    long_copy_prog(core, tab, &(core->prog[core->nb_prog - 1]),
+    long_copy_prog(tab, &(core->prog[core->nb_prog - 1]),
 &(core->prog[ind]));
 }

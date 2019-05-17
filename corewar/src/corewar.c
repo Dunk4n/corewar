@@ -10,9 +10,9 @@
 
 int     ooo = 0;
 
-void    (*const instruction[16])(corewar_t *core, prog_t *prog) =
+void    (*const instruction[26])(corewar_t *core, prog_t *prog) =
 {live, ld, st, add, sub, and, or, xor, zjmp, ldi, sti, my_fork, lld,
-lldi, lfork, aff};
+lldi, lfork, aff, not, rsht, lsht, NULL, NULL, NULL, my_rand, die, kill};
 
 static  void    win(corewar_t *core)
 {
@@ -20,8 +20,8 @@ static  void    win(corewar_t *core)
     size_t   tmp = 0;
 
     while (i < core->nb_prog) {
-        printf("%ld name = [%s], %d\n", i + 1,
-core->prog[i].name, core->prog[i].live);
+//        printf("%ld name = [%s], %d\n", i + 1,
+//core->prog[i].name, core->prog[i].live);
         if (core->prog[i].daron == core->prog[i].nb && core->prog[i].live >= 0)
             tmp = core->prog[i].daron;
         i++;
@@ -39,8 +39,10 @@ static  void    check_live_prog(corewar_t *core)
             i++;
             continue ;
         }
-        if (core->prog[core->prog[i].daron].live == 0)
+        if (core->prog[core->prog[i].daron].live == 0) {
             core->prog[core->prog[i].daron].live = -1;
+            core->prog[core->prog[i].daron].tmp = -1;
+        }
         if (core->prog[core->prog[i].daron].live == 1) {
             core->prog[core->prog[i].daron].live = 0;
             if (core->prog[i].daron == core->prog[i].nb)
@@ -53,12 +55,9 @@ static  void    check_live_prog(corewar_t *core)
 
 static  void    make_one_prog(corewar_t *core, size_t ind)
 {
-//    if (core->prog[ind].nb > 1)
-//        printf("nb = %d, tmp = %d, exc = %d\n",
-//core->prog[ind].nb, core->prog[ind].tmp, core->prog[ind].to_exc);
     if (core->prog[ind].tmp == 0) {
-        if (core->prog[ind].to_exc >= 0 && core->prog[ind].to_exc < 16) {
-//            printf("ind = %d, exc = %d, i = %d\n",
+        if (core->prog[ind].to_exc >= 0 && core->prog[ind].to_exc < NB_INSTR) {
+//            printf("ind = %ld, exc = %d, i = %d\n",
 //ind, core->prog[ind].to_exc, ooo);
             instruction[core->prog[ind].to_exc](core, &(core->prog[ind]));
             core->prog[ind].to_exc = -1;
@@ -66,10 +65,6 @@ static  void    make_one_prog(corewar_t *core, size_t ind)
         else {
             core->prog[ind].to_exc = (int)core->map[core->prog[ind].pc] - 1;
             core->prog[ind].tmp = op_tab[core->prog[ind].to_exc].nbr_cycles - 1;
-            if (core->prog[ind].nb > 1) {
-//                printf("beffor %d, %d, %d | %d, %d\n",
-//core->prog[ind].pc, core->prog[ind].to_exc, core->prog[ind].tmp, (int)core->map[core->prog[ind].pc] - 1, op_tab[core->prog[ind].to_exc].nbr_cycles - 1);
-            }
         }
     }
     if (core->prog[ind].tmp > 0)
@@ -89,8 +84,8 @@ static  void    all_prog(corewar_t *core)
 
 void    corewar(corewar_t *core)
 {
-    size_t i = 0;
-    size_t to_die = 0;
+    size_t  i = 0;
+    int     to_die = 0;
 
     while (!core->segfault && core->nb_prog_live > 1 &&
 core->cycle_to_die > 1) {
@@ -107,7 +102,7 @@ core->cycle_to_die > 1) {
         i++;
         ooo = i;
     }
-    printf("\ni = %ld, cycle = %d, nb_prog_live = %ld, segfault = %ld\n",
+    printf("\ni = %ld, cycle = %d, nb_prog_live = %ld, segfault = %d\n",
 i, core->cycle_to_die, core->nb_prog_live, core->segfault);
     win(core);
 }
