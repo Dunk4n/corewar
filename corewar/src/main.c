@@ -35,7 +35,7 @@ void    set_value(corewar_t *core)
 
 int     malloc_start(corewar_t *core, char ***instr)
 {
-    char        *name[2] = {"42.cor", "octobre.cor"};
+    char        *name[2] = {"42.cor", "pdd.cor"};
     size_t      i = 0;
 
     while (i < MEM_SIZE) {
@@ -54,6 +54,8 @@ int     main(int ac, char **av)
 
     if (ac == 2 && my_strcmp(av[1], "-h"))
         return (flag_h(av[1]));
+    // if (!parsing(ac, av, &core))
+    //     return 84;
     if (malloc_start(&core, &instr) == 84)
         return (84);
     set_value(&core);

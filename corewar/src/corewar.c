@@ -12,7 +12,7 @@ int     ooo = 0;
 
 void    (*const instruction[26])(corewar_t *core, prog_t *prog) =
 {live, ld, st, add, sub, and, or, xor, zjmp, ldi, sti, my_fork, lld,
-lldi, lfork, aff, not, rsht, lsht, NULL, NULL, NULL, my_rand, die, kill};
+lldi, lfork, aff, not, rsht, lsht, mul, my_div, mod, my_rand, die, kill};
 
 static  void    win(corewar_t *core)
 {

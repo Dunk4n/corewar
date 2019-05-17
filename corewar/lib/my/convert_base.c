@@ -24,12 +24,14 @@ int     sizetab(int nbr, char const *base)
     return (i);
 }
 
+#include <stdio.h>
+
 char *convert_base(char const *nbr, char const *base_from, char const *base_to)
 {
     long    nb = my_getnbr_base(nbr, base_from);
     int     neg = 1;
     int     j = sizetab(nb, base_to);
-    char    *tab = tab = malloc((sizeof(char)) * j + 2);
+    char    *tab = malloc((sizeof(char)) * j + 2);
 
     if (tab == NULL)
         return NULL;
@@ -41,8 +43,8 @@ char *convert_base(char const *nbr, char const *base_from, char const *base_to)
     }
     else
         tab[j] = '\0';
-    while (nb != 0) {
-        tab[(j--) - 1] = base_to[(nb % my_strlen(base_to)) * neg];
+    while (nb != 0 && j >= 0) {
+        tab[(j--) - 1] = 0;//base_to[(nb % my_strlen(base_to)) * neg];
         nb /= my_strlen(base_to);
     }
     return (tab);

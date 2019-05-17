@@ -35,6 +35,9 @@ SRC	=	$(D_SRC)op.c			\
 		$(D_SRC)not.c			\
 		$(D_SRC)rsht.c			\
 		$(D_SRC)lsht.c			\
+		$(D_SRC)mul.c			\
+		$(D_SRC)div.c			\
+		$(D_SRC)mod.c			\
 		$(D_SRC)rand.c			\
 		$(D_SRC)die.c			\
 		$(D_SRC)kill.c			\

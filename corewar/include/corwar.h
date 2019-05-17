@@ -103,9 +103,9 @@ void    aff(corewar_t *core, prog_t *prog);
 void    not(corewar_t *core, prog_t *prog);
 void    rsht(corewar_t *core, prog_t *prog);
 void    lsht(corewar_t *core, prog_t *prog);
-//F: multiplication
-//F: division
-//F: modulo
+void    mul(corewar_t *core, prog_t *prog);
+void    my_div(corewar_t *core, prog_t *prog);
+void    mod(corewar_t *core, prog_t *prog);
 void    my_rand(corewar_t *core, prog_t *prog);
 void    die(corewar_t *core, prog_t *prog);
 void    kill(corewar_t *core, prog_t *prog);
