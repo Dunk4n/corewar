@@ -8,9 +8,7 @@
 #include <stdlib.h>
 #include "corwar.h"
 
-int     ooo = 0;
-
-void    (*const instruction[26])(corewar_t *core, prog_t *prog) =
+void    (*const instruction[])(corewar_t *core, prog_t *prog) =
 {live, ld, st, add, sub, and, or, xor, zjmp, ldi, sti, my_fork, lld,
 lldi, lfork, aff, not, rsht, lsht, mul, my_div, mod, my_rand, die, kill};
 
@@ -57,8 +55,8 @@ static  void    make_one_prog(corewar_t *core, size_t ind)
 {
     if (core->prog[ind].tmp == 0) {
         if (core->prog[ind].to_exc >= 0 && core->prog[ind].to_exc < NB_INSTR) {
-//            printf("ind = %ld, exc = %d, i = %d\n",
-//ind, core->prog[ind].to_exc, ooo);
+//            printf("ind = %ld, exc = %d\n",
+//ind, core->prog[ind].to_exc);
             instruction[core->prog[ind].to_exc](core, &(core->prog[ind]));
             core->prog[ind].to_exc = -1;
         }
@@ -100,9 +98,8 @@ core->cycle_to_die > 1) {
         }
         to_die++;
         i++;
-        ooo = i;
     }
-    printf("\ni = %ld, cycle = %d, nb_prog_live = %ld, segfault = %d\n",
-i, core->cycle_to_die, core->nb_prog_live, core->segfault);
+//    printf("\ni = %ld, cycle = %d, nb_prog_live = %ld, segfault = %d\n",
+//i, core->cycle_to_die, core->nb_prog_live, core->segfault);
     win(core);
 }

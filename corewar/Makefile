@@ -48,7 +48,7 @@ OBJ	=	$(SRC:%.c=%.o)
 
 NAME	=	corewar
 
-CFLAGS	=	-W -Wall -Wextra -I$(D_INC) -g
+CFLAGS	=	-W -Wall -Wextra -I$(D_INC)
 
 LDFLAGS	=	-L$(D_LIB) -lmy
 

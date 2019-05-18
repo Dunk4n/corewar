@@ -1,79 +1,68 @@
 /*
 ** EPITECH PROJECT, 2019
-** dump.c
+** src/my_dump
 ** File description:
-** print_dump
+** r/ProgrammerHumor
 */
 
-#include <string.h>
 #include <stdlib.h>
 #include "corwar.h"
 
-static void free_all(char *str1, char *str2)
+static  void    display_char(unsigned char c)
 {
-    free(str1);
-    free(str2);
-    return;
-}
+    char    *hex = "0123456789ABCDEF";
+    char    to_print[] = "00";
 
-static int print_padding(size_t i)
-{
-    char *str = my_calloc(sizeof(char) * (6 + 1), ' ');
-
-    if (str == NULL)
-        return 84;
-    str = convert_base(my_itoa(i), DEC, HEX);
-    for (size_t len = (size_t)my_strlen(str); len < 7; len++)
-        str[len] = ' ';
-    str[5] = ':';
-    my_putstr(str);
-    free(str);
-    return 0;
-}
-
-static void execptionell_print(size_t len, char *str)
-{
-    if (len == 0) {
-        my_putstr("00 ");
-    } else if (len == 1) {
-        my_putchar('0');
-        my_putchar(str[0]);
-        my_putchar(' ');
-    } else
-        return;
-}
-
-static int display_dump_line(corewar_t *core, size_t i)
-{
-    char *mem = my_itoa((unsigned char)core->map[i]);
-    char *str = convert_base(mem, DEC, HEX);
-    size_t len = (size_t)my_strlen(str);
-
-    if (mem == NULL || str == NULL)
-        return 84;
-    execptionell_print(len, str);
-    for (size_t u = 0; str[u]; u++) {
-        my_putchar(str[u]);
-        if (u % 2 != 0)
-            my_putchar(' ');
+    to_print[1] = hex[c % my_strlen(hex)];
+    if (c >= 16) {
+        c /= my_strlen(hex);
+        to_print[0] = hex[c % my_strlen(hex)];
     }
-    free_all(str, mem);
-    return 0;
+    my_putstr(to_print);
 }
 
-int dump(corewar_t *core)
+static  void    print_beffor(int start)
 {
-    for (size_t i = 0; i < MEM_SIZE; i++) {
-        if (i == 0)
-            my_putstr("0    : ");
-        else if (i % 32 == 0) {
-            my_putchar('\n');
-            if (print_padding(i) == 84)
-                return 84;
+    char    beffor[] = "0    : ";
+    char    *hex = "0123456789ABCDEF";
+    int     tmp = start;
+    size_t  j = 0;
+
+    if (start > 0) {
+        while (tmp > 0) {
+            tmp /= my_strlen(hex);
+            j++;
         }
-        if (display_dump_line(core, i) == 84)
-            return 84;
+        j--;
+        while (start > 0) {
+            beffor[j % my_strlen(beffor)] = hex[start % my_strlen(hex)];
+            start /= my_strlen(hex);
+            j--;
+        }
+    }
+    my_putstr(beffor);
+}
+
+static  void    display_line(char *map, int start)
+{
+    size_t  i = 0;
+
+    print_beffor(start);
+    while (i < 32) {
+        display_char((unsigned char)map[i]);
+        if (i < 31)
+            my_putchar(' ');
+        i++;
     }
     my_putchar('\n');
-    return 0;
+}
+
+void    dump(char *map)
+{
+    size_t  i = 0;
+
+    while (i < MEM_SIZE / 32) {
+        display_line(map + 32 * i, 32 * i);
+        i++;
+    }
 }
