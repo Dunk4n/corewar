@@ -6,7 +6,6 @@
 */
 
 #include <stdlib.h>
-#include <stdio.h>
 #include "my.h"
 
 char    *my_strdupcat(char *dest, char const *src)
