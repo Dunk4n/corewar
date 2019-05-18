@@ -35,14 +35,13 @@ void    set_value(corewar_t *core)
 
 int     malloc_start(corewar_t *core, char ***instr)
 {
-    char        *name[2] = {"42.cor", "zork.cor"};
     size_t      i = 0;
 
     while (i < MEM_SIZE) {
         core->map[i] = 0;
         core->who[i++] = -1;
     }
-    if (!(*instr = charge_all_cor(name, 2, &(core->prog))))
+    if (!(*instr = charge_all_cor(core->order, 2, &(core->prog))))
         return (84);
     return (0);
 }
@@ -54,12 +53,12 @@ int     main(int ac, char **av)
 
     if (ac == 2 && !my_strcmp(av[1], "-h"))
         return (flag_h(av[1]));
-    // if (!parsing(ac, av, &core))
-    //     return 84;
+    if (!parsing(ac, av, &core))
+        return 84;
     if (malloc_start(&core, &instr) == 84)
         return (84);
     set_value(&core);
-    put_prog(core.map, core.who, core.prog, instr);
+    put_prog(&core, instr);
     corewar(&core);
     if (core.segfault)
         return (84);

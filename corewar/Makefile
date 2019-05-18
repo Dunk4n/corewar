@@ -42,6 +42,10 @@ SRC	=	$(D_SRC)op.c			\
 		$(D_SRC)die.c			\
 		$(D_SRC)kill.c			\
 		$(D_SRC)dump.c			\
+		$(D_SRC)parsing.c			\
+		$(D_SRC)parsing_two.c			\
+		$(D_SRC)is_num.c			\
+		$(D_SRC)init_core.c			\
 		$(D_SRC)main.c
 
 OBJ	=	$(SRC:%.c=%.o)
