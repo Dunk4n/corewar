@@ -26,7 +26,6 @@ are MEM_SIZE modulo\n");
 
 void    set_value(corewar_t *core)
 {
-    core->nb_prog = 2;
     core->cycle_to_die = CYCLE_TO_DIE;
     core->nb_live = 0;
     core->segfault = 0;
@@ -41,7 +40,7 @@ int     malloc_start(corewar_t *core, char ***instr)
         core->map[i] = 0;
         core->who[i++] = -1;
     }
-    if (!(*instr = charge_all_cor(core->order, 2, &(core->prog))))
+    if (!(*instr = charge_all_cor(core->order, core->nb_prog, &(core->prog))))
         return (84);
     return (0);
 }

@@ -97,6 +97,7 @@ int parse(int ac, char **av, int *arg, corewar_t *core)
 int parsing(int ac, char **av, corewar_t *core)
 {
     int arg = 1;
+
     if (!init_core(core))
         return 0;
     if ((ac - 1) == arg)
