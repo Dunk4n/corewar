@@ -5,7 +5,6 @@
 ** is_num.c
 */
 
-#include <stdio.h>
 #include "corwar.h"
 
 static int number_ok(char c)

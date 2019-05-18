@@ -5,7 +5,6 @@
 ** parsing_two.c
 */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "corwar.h"

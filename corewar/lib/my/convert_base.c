@@ -24,8 +24,6 @@ int     sizetab(int nbr, char const *base)
     return (i);
 }
 
-#include <stdio.h>
-
 char *convert_base(char const *nbr, char const *base_from, char const *base_to)
 {
     long    nb = my_getnbr_base(nbr, base_from);
