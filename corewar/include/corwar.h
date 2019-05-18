@@ -62,11 +62,16 @@ typedef struct  corewar_s
     int         nb_live;
     int         segfault;
     size_t      nb_prog_live;
+    int dump;
+    char *order[5];
+    int adress[4];
+    int number[4];
+    int champions;
 }               corewar_t;
 
 char    *charge_cor(char *name, prog_t *prog);
 char    **charge_all_cor(char **name, size_t size, prog_t **progs);
-void    put_prog(char *map, int *who, prog_t *prog, char **instr);
+void    put_prog(corewar_t *core, char **instr);
 void    corewar(corewar_t *core);
 int     get_arg(char *map, int pc, int *tab);
 int     get_value_arg(corewar_t *core, prog_t *prog, int value, int type);
@@ -74,6 +79,12 @@ int     get_value_arg_long(corewar_t *core, prog_t *prog, int value, int type);
 int     get_nb(corewar_t *core);
 void    put_fork_in_memory(corewar_t *core, int arg, prog_t *a, prog_t *b);
 int     dump(corewar_t *core);
+int parsing(int ac, char **av, corewar_t *core);
+int is_number(char *str);
+int put_champion(char **av, int *arg, corewar_t *core);
+int init_core(corewar_t *core);
+void sort_name(corewar_t *core);
+int count_cor(int ac, char **av, corewar_t *core);
 
 /*
 ** instruction
