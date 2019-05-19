@@ -34,7 +34,7 @@ static  void    check_live_prog(corewar_t *core)
     while (i < core->nb_prog) {
         if (core->prog[i].daron != core->prog[i].nb) {
             i++;
-            continue ;
+            continue;
         }
         if (core->prog[core->prog[i].daron].live == 0) {
             core->prog[core->prog[i].daron].live = -1;
