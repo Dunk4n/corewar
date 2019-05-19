@@ -42,8 +42,10 @@ char    **parse_head(char const *name, compil_t *compil)
 
     compil->label = NULL;
     compil->nb_label = 0;
-    if ((fd = open(name, O_RDONLY)) == -1)
+    if ((fd = open(name, O_RDONLY)) == -1) {
+        error(NULL, 0, "failed to open file");
         return (NULL);
+    }
     compil->head.magic = little_endian(COREWAR_EXEC_MAGIC);
     if (!(file = get_file(fd, 0, compil, &head_or_comment))) {
         close(fd);

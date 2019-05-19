@@ -42,7 +42,7 @@ typedef struct  compil_s
 
 char    **parse_head(char const *name, compil_t *compil);
 char    **get_file(int fd, size_t nb, compil_t *compil, int *head_or_comment);
-int     bad_instruction(char *line, compil_t *compil);
+int     bad_instruction(char *line, compil_t *compil, size_t nb);
 int     good_name(char c);
 int     check_arg(char *line, int code, header_t *head);
 int     is_label(char *line, compil_t *compil);
@@ -58,5 +58,6 @@ void    set_parameter(compil_t *compil, char *line, int code, int pos);
 int     little_endian(int nb);
 int     check_label(char **file, compil_t *compil);
 long    long    my_getnbr_long(char const *str);
+int     error(char *line, size_t nb, char *err_msg);
 
 #endif

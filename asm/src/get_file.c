@@ -19,7 +19,7 @@ static  int     if_end_of_line_is_corect(char *line, size_t i)
     return (1);
 }
 
-static  int     get_name(header_t *head, char *line)
+static  int     get_name(header_t *head, char *line, size_t nb)
 {
     size_t i = 0;
     size_t j = 0;
@@ -30,21 +30,27 @@ static  int     get_name(header_t *head, char *line)
         return (0);
     if (line[i] != '.' || my_strncmp(line + i, NAME_CMD_STRING,
 my_strlen(NAME_CMD_STRING)) || (line[i + my_strlen(NAME_CMD_STRING)] != ' ' &&
-line[i + my_strlen(NAME_CMD_STRING)] != '\t'))
+line[i + my_strlen(NAME_CMD_STRING)] != '\t')) {
+        my_printf("line %d syntax error : %s\n", nb, line);
         return (-1);
+    }
     i += my_strlen(NAME_CMD_STRING);
     while (line[i] == ' ' || line[i] == '\t')
         i++;
-    if (line[i++] != '\"')
+    if (line[i++] != '\"') {
+        my_printf("line %d syntax error : %s\n", nb, line);
         return (-1);
+    }
     while (line[i] && line[i] != '\"' && j < PROG_NAME_LENGTH)
         head->prog_name[j++] = line[i++];
-    if (!if_end_of_line_is_corect(line, i))
+    if (!if_end_of_line_is_corect(line, i)) {
+        my_printf("line %d syntax error : %s\n", nb, line);
         return (-1);
+    }
     return (1);
 }
 
-static  int     get_comment(header_t *head, char *line)
+static  int     get_comment(header_t *head, char *line, size_t nb)
 {
     size_t i = 0;
     size_t j = 0;
@@ -55,17 +61,21 @@ static  int     get_comment(header_t *head, char *line)
         return (0);
     if (line[i] != '.' || my_strncmp(line + i, COMMENT_CMD_STRING,
 my_strlen(COMMENT_CMD_STRING)) || (line[i + my_strlen(COMMENT_CMD_STRING)] !=
-' ' && line[i + my_strlen(COMMENT_CMD_STRING)] != '\t'))
-        return (-1);
+' ' && line[i + my_strlen(COMMENT_CMD_STRING)] != '\t')) {
+        return (error(line, nb, "syntax error") -1);
+    }
     i += my_strlen(COMMENT_CMD_STRING);
     while (line[i] == ' ' || line[i] == '\t')
         i++;
-    if (line[i++] != '\"')
-        return (-1);
+    if (line[i++] != '\"') {
+        return (error(line, nb, "syntax error") -1);
+    }
     while (line[i] && line[i] != '\"' && j < COMMENT_LENGTH)
         head->comment[j++] = line[i++];
-    if (!if_end_of_line_is_corect(line, i))
-        return (-1);
+    if (!if_end_of_line_is_corect(line, i)) {
+        my_printf("line %d syntax error : %s\n", nb, line);
+        return (error(line, nb, "syntax error") -1);
+    }
     return (2);
 }
 
@@ -74,11 +84,11 @@ char    **get_file(int fd, size_t nb, compil_t *compil, int *head_or_comment)
     char    **file;
     char    *line = get_next_line(fd);
 
-    if (*head_or_comment >= 2 && line && bad_instruction(line, compil))
+    if (*head_or_comment >= 2 && line && bad_instruction(line, compil, nb))
         *head_or_comment = -1;
     if (*head_or_comment < 2 && *head_or_comment != -1 && line)
         *head_or_comment = (*head_or_comment < 1) ? get_name(&(compil->head),
-line) : get_comment(&(compil->head), line);
+line, nb) : get_comment(&(compil->head), line, nb);
     if (!line || *head_or_comment == -1) {
         if (!(file = malloc(sizeof(char*) * (nb + 1))))
             return (NULL);

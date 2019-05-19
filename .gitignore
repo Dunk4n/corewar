@@ -1,3 +1,4 @@
+.vscode
 asm/asm
 corewar/corewar
 *.cor
