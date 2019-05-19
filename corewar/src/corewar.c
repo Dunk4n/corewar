@@ -18,8 +18,6 @@ static  void    win(corewar_t *core)
     size_t   tmp = 0;
 
     while (i < core->nb_prog) {
-//        printf("%ld name = [%s], %d\n", i + 1,
-//core->prog[i].name, core->prog[i].live);
         if (core->prog[i].daron == core->prog[i].nb && core->prog[i].live >= 0)
             tmp = core->prog[i].daron;
         i++;
@@ -56,8 +54,6 @@ static  void    make_one_prog(corewar_t *core, size_t ind)
 {
     if (core->prog[ind].tmp == 0) {
         if (core->prog[ind].to_exc >= 0 && core->prog[ind].to_exc < NB_INSTR) {
-//            printf("ind = %ld, exc = %d\n",
-//ind, core->prog[ind].to_exc);
             instruction[core->prog[ind].to_exc](core, &(core->prog[ind]));
             core->prog[ind].to_exc = -1;
         }
@@ -100,8 +96,6 @@ core->cycle_to_die > 1 && (core->dump == -1 || (int)i < core->dump)) {
         to_die++;
         i++;
     }
-//    printf("\ni = %ld, cycle = %d, nb_prog_live = %ld, segfault = %d\n",
-//i, core->cycle_to_die, core->nb_prog_live, core->segfault);
     win(core);
     if (core->dump >= 0)
         dump(core->map);

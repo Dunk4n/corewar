@@ -35,6 +35,16 @@ void    set_reg(prog_t *prog)
     }
 }
 
+static  void    set_value_core(size_t nb, prog_t **progs, size_t size, size_t i)
+{
+    (*progs)[nb].nb = nb;
+    (*progs)[nb].nb_name = i;
+    (*progs)[nb].daron = nb;
+    (*progs)[nb].pc = (int)nb * MEM_SIZE / size;
+    (*progs)[nb].start = (*progs)[nb].pc;
+    set_reg(&((*progs)[nb]));
+}
+
 char    **charge_all_cor(char **name, size_t size, prog_t **progs)
 {
     size_t  i = 0;
@@ -53,16 +63,9 @@ char    **charge_all_cor(char **name, size_t size, prog_t **progs)
             i++;
             continue;
         }
-        instr[nb] = charge_cor(name[i], &((*progs)[nb]));
-        if (!instr[nb])
+        if (!(instr[nb] = charge_cor(name[i], &((*progs)[nb]))))
             return (free_all_cor(instr, *progs, nb));
-        (*progs)[nb].nb = nb;
-        (*progs)[nb].nb_name = i;
-        (*progs)[nb].daron = nb;
-        (*progs)[nb].pc = (int)nb * MEM_SIZE / size;
-        (*progs)[nb].start = (*progs)[nb].pc;
-        set_reg(&((*progs)[nb++]));
-        i++;
+        set_value_core(nb++, progs, size, i++);
     }
     return (instr);
 }

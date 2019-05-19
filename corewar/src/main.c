@@ -62,5 +62,5 @@ int     main(int ac, char **av)
     corewar(&core);
     if (core.segfault)
         return (84);
-    return(0);
+    return (0);
 }

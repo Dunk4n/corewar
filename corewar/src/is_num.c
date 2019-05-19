@@ -22,7 +22,7 @@ int is_number(char *str)
         if (number_ok(str[index]) == 0)
             continue;
         else
-            return(0);
+            return (0);
     }
     return 1;
 }
