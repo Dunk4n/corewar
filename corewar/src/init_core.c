@@ -58,8 +58,7 @@ void sort_name(corewar_t *core)
             tmp[core->number[index] - 1] = core->order[index];
             tmp_a[core->number[index] - 1] = core->adress[index];
         }
-    }
-    for (int index = 0; index <= 4; index++) {
+    } for (int index = 0; index <= 4; index++) {
         if (core->number[index] == 0)
             put_theme(&tmp, &tmp_a, core, index);
     } for (int i = 0; i < 4; i++)

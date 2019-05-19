@@ -42,7 +42,7 @@ char *convert_base(char const *nbr, char const *base_from, char const *base_to)
     else
         tab[j] = '\0';
     while (nb != 0 && j >= 0) {
-        tab[(j--) - 1] = 0;//base_to[(nb % my_strlen(base_to)) * neg];
+        tab[(j--) - 1] = base_to[(nb % my_strlen(base_to)) * neg];
         nb /= my_strlen(base_to);
     }
     return (tab);
