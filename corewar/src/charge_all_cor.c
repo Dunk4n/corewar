@@ -58,7 +58,6 @@ char    **charge_all_cor(char **name, size_t size, prog_t **progs)
             return (free_all_cor(instr, *progs, nb));
         (*progs)[nb].nb = nb;
         (*progs)[nb].nb_name = i;
-        printf("%d, %d\n", i, nb);
         (*progs)[nb].daron = nb;
         (*progs)[nb].pc = (int)nb * MEM_SIZE / size;
         (*progs)[nb].start = (*progs)[nb].pc;

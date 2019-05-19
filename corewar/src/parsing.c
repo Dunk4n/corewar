@@ -91,6 +91,8 @@ int parse(int ac, char **av, int *arg, corewar_t *core)
         put_champion(av, arg, core);
         return 1;
     }
+    write(2, &av[*arg][0], my_strlen(av[*arg]));
+    write (2, ": commande not found\n", 21);
     return 0;
 }
 
@@ -103,11 +105,8 @@ int parsing(int ac, char **av, corewar_t *core)
     if (ac == arg)
         return 0;
     while (arg < ac) {
-        if (!parse(ac, av, &arg, core)) {
-            write(2, &av[arg][0], my_strlen(av[arg]));
-            write (2, ": commande not found\n", 21);
+        if (!parse(ac, av, &arg, core))
             return 0;
-        }
         if ((ac - 1) == arg)
             break;
         arg++;
