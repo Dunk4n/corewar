@@ -51,6 +51,17 @@ static  void    init_compil(compil_t *compil)
         compil->instr[i++] = '\0';
 }
 
+void    free_compil(compil_t *compil)
+{
+    size_t j = 0;
+
+    while (j < compil->nb_label) {
+        free(compil->label[j].name);
+        j++;
+    }
+    free(compil->label);
+}
+
 int     write_instruction(compil_t *compil, int fd)
 {
     size_t  i = 0;
@@ -61,9 +72,13 @@ int     write_instruction(compil_t *compil, int fd)
     while (compil->file[i]) {
         if (is_instru(compil->file[i]))
             compile_instruction(compil, compil->file[i]);
+        free(compil->file[i]);
         i++;
     }
+    free_compil(compil);
+    free(compil->file);
     write(fd, compil->instr, compil->pos);
+    free(compil->instr);
     close(fd);
     return (1);
 }

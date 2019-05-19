@@ -23,7 +23,7 @@ SRC	=	$(D_SRC)main.c			\
 		$(D_SRC)is_arg.c		\
 		$(D_SRC)check_label.c		\
 		$(D_SRC)my_getnbr_long.c	\
-		$(D_SRC)error.c				\
+		$(D_SRC)error.c			\
 
 OBJ	=	$(SRC:%.c=%.o)
 
