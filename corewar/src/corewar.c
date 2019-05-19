@@ -86,7 +86,7 @@ void    corewar(corewar_t *core)
     int     to_die = 0;
 
     while (!core->segfault && core->nb_prog_live > 1 &&
-core->cycle_to_die > 1) {
+core->cycle_to_die > 1 && (core->dump == -1 || (int)i < core->dump)) {
         all_prog(core);
         if (to_die >= core->cycle_to_die) {
             check_live_prog(core);
@@ -102,4 +102,6 @@ core->cycle_to_die > 1) {
 //    printf("\ni = %ld, cycle = %d, nb_prog_live = %ld, segfault = %d\n",
 //i, core->cycle_to_die, core->nb_prog_live, core->segfault);
     win(core);
+    if (core->dump >= 0)
+        dump(core->map);
 }

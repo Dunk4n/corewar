@@ -57,7 +57,8 @@ int     main(int ac, char **av)
     if (malloc_start(&core, &instr) == 84)
         return (84);
     set_value(&core);
-    put_prog(&core, instr);
+    if (!put_prog(&core, instr))
+        return 84;
     corewar(&core);
     if (core.segfault)
         return (84);

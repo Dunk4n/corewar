@@ -18,10 +18,11 @@ int init_core(corewar_t *core)
     }
     core->order[4] = NULL;
     for (int i = 0; i < 4; i++)
-        core->adress[i] = 0;
+        core->adress[i] = -1;
     for (int i = 0; i < 4; i++)
         core->number[i] = 0;
-    core->champions = 0;
+    core->champions = -1;
+    core->dump = -1;
     return 1;
 }
 

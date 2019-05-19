@@ -71,7 +71,7 @@ typedef struct  corewar_s
 
 char    *charge_cor(char *name, prog_t *prog);
 char    **charge_all_cor(char **name, size_t size, prog_t **progs);
-void    put_prog(corewar_t *core, char **instr);
+int    put_prog(corewar_t *core, char **instr);
 void    corewar(corewar_t *core);
 int     get_arg(char *map, int pc, int *tab);
 int     get_value_arg(corewar_t *core, prog_t *prog, int value, int type);
