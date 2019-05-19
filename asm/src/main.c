@@ -28,11 +28,16 @@ int     main(int ac, char **av)
         return (flag_h(av[1]));
     if (!(compil = my_calloc(sizeof(compil_t), 0)))
         return (84);
-    if (!(compil->file = parse_head(av[1], compil)))
+    if (!(compil->file = parse_head(av[1], compil))) {
+        free(compil);
         return (84);
-    if (!write_head(compil, &(compil->head), av[1], &fd))
+    }
+    if (!write_head(compil, &(compil->head), av[1], &fd)) {
+        free(compil);
         return (84);
+    }
     if (!write_instruction(compil, fd))
         return (84);
+    free(compil);
     return (0);
 }
