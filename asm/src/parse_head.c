@@ -62,7 +62,8 @@ char    **parse_head(char const *name, compil_t *compil)
         close(fd);
         return (NULL);
     }
-    error_file(file, compil, &head_or_comment, fd);
+    if (!error_file(file, compil, &head_or_comment, fd))
+        return (NULL);
     close(fd);
     return (file);
 }

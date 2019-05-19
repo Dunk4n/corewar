@@ -84,7 +84,9 @@ void    corewar(corewar_t *core)
 
     while (!core->segfault && core->nb_prog_live > 1 &&
 core->cycle_to_die > 1 && (core->dump == -1 || (int)i < core->dump)) {
+        printf("A %d\n", i);
         all_prog(core);
+        printf("B %d\n", i);
         if (to_die >= core->cycle_to_die) {
             check_live_prog(core);
             to_die = 0;
