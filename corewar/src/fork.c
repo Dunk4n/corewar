@@ -27,6 +27,7 @@ static  void    copy_prog(int *tab, prog_t *a, prog_t *b)
 
     a->daron = b->daron;
     a->size = b->size;
+    a->nb_name = b->nb_name;
     a->start = MODU((int)b->start + tab[0] % IDX_MOD);
     a->tmp = 1;
     a->carry = b->carry;

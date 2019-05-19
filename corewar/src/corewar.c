@@ -24,7 +24,8 @@ static  void    win(corewar_t *core)
             tmp = core->prog[i].daron;
         i++;
     }
-    my_printf("The player %d(%s) has won.\n", tmp + 1, core->prog[tmp].name);
+    my_printf("The player %d(%s) has won.\n", core->prog[tmp].nb_name + 1,
+core->prog[tmp].name);
 }
 
 static  void    check_live_prog(corewar_t *core)

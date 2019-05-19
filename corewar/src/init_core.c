@@ -44,7 +44,7 @@ void sort_name(corewar_t *core)
 
     for (int i = 0; i < 4; i++) {
         tmp[i] = NULL;
-        tmp_a[i] = 0;
+        tmp_a[i] = -1;
     }
     tmp[5] = NULL;
     for (int index = 0; index <= 4; index++) {

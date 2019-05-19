@@ -38,6 +38,7 @@ void    set_reg(prog_t *prog)
 char    **charge_all_cor(char **name, size_t size, prog_t **progs)
 {
     size_t  i = 0;
+    size_t  nb = 0;
     char    **instr;
 
     if (!(*progs = malloc(sizeof(prog_t) * size)))
@@ -47,15 +48,22 @@ char    **charge_all_cor(char **name, size_t size, prog_t **progs)
         return (NULL);
     }
     instr[size] = NULL;
-    while (i < size) {
-        instr[i] = charge_cor(name[i], &((*progs)[i]));
-        if (!instr[i])
-            return (free_all_cor(instr, *progs, i));
-        (*progs)[i].nb = i;
-        (*progs)[i].daron = i;
-        (*progs)[i].pc = (int)i * MEM_SIZE / size;
-        (*progs)[i].start = (*progs)[i].pc;
-        set_reg(&((*progs)[i++]));
+    while (i < 4) {
+        if (!name[i]) {
+            i++;
+            continue;
+        }
+        instr[nb] = charge_cor(name[i], &((*progs)[nb]));
+        if (!instr[nb])
+            return (free_all_cor(instr, *progs, nb));
+        (*progs)[nb].nb = nb;
+        (*progs)[nb].nb_name = i;
+        printf("%d, %d\n", i, nb);
+        (*progs)[nb].daron = nb;
+        (*progs)[nb].pc = (int)nb * MEM_SIZE / size;
+        (*progs)[nb].start = (*progs)[nb].pc;
+        set_reg(&((*progs)[nb++]));
+        i++;
     }
     return (instr);
 }

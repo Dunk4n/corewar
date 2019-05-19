@@ -40,6 +40,7 @@ typedef union   short_u
 typedef struct  prog_s
 {
     size_t      nb;
+    size_t      nb_name;
     size_t      daron;
     size_t      size;
     size_t      start;

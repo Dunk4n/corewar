@@ -20,7 +20,7 @@ core->nb_prog].live == -1)
     core->prog[core->prog[tab[0] % core->nb_prog].daron %
 core->nb_prog].live = 1;
     my_printf("The player %d(%s) is alive\n", core->prog[tab[0] %
-core->nb_prog].daron + 1, core->prog[core->prog[tab[0] % core->nb_prog].daron %
-core->nb_prog].name);
+core->nb_prog].nb_name + 1, core->prog[core->prog[tab[0] % core->nb_prog].daron
+% core->nb_prog].name);
     core->nb_live++;
 }
