@@ -19,7 +19,7 @@ const   op_t    op_tab[] =
 {"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6,
 "ou  (or   r1, r2, r3   r1 | r2 -> r3", 1, 4},
 {"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6,
-"ou (xor  r1, r2, r3   r1^r2 -> r3", 1, 4},
+"ou (xor  r1, r2, r3   r1 ^ r2 -> r3", 1, 4},
 {"zjmp", 1, {T_DIR}, 9, 20, "jump if zero", 0, 2},
 {"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
 "load index", 1, 2},
