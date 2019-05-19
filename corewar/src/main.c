@@ -63,5 +63,7 @@ int     main(int ac, char **av)
     if (core.segfault)
         return (84);
     free(core.prog);
+    for (int i = 0; i <= 4; i++)
+        free(core.order[i]);
     return (0);
 }

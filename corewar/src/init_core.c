@@ -37,6 +37,12 @@ static void put_theme(char ***tmp, int **tmp_a, corewar_t *core, int index)
     }
 }
 
+void free_tmp(char ***tmp, int **tmp_a)
+{
+    free(*tmp);
+    free(*tmp_a);
+}
+
 void sort_name(corewar_t *core)
 {
     char **tmp = malloc(sizeof(char *) * 5);
@@ -60,4 +66,5 @@ void sort_name(corewar_t *core)
         core->order[i] = tmp[i];
     for (int i = 0; i < 4; i++)
         core->adress[i] = tmp_a[i];
+    free_tmp(&tmp, &tmp_a);
 }
