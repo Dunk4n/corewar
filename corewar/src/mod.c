@@ -16,7 +16,7 @@ void    mod(corewar_t *core, prog_t *prog)
 REG_NUMBER || tab[2] < 0 || tab[2] >= REG_NUMBER)
         return ;
     prog->carry = 0;
-    if (!prog->reg[tab[1] % REG_NUMBER]) 
+    if (!prog->reg[tab[1] % REG_NUMBER])
         prog->reg[tab[2] % REG_NUMBER] = 1;
     else
         prog->reg[tab[2] % REG_NUMBER] = prog->reg[tab[0] % REG_NUMBER] %
