@@ -81,8 +81,8 @@ void    set_parameter(compil_t *compil, char *line, int code, int pos)
 
     while (*line && i < MAX_ARGS_NUMBER) {
         set_one_parameter(compil, line, code, pos);
-        while (*line && *line != ' ' && *line != '\t' && *line != SEPARATOR_CHAR
-&& *line != COMMENT_CHAR)
+        while (*line && *line != ' ' && *line != '\t' && *line !=
+SEPARATOR_CHAR && *line != COMMENT_CHAR)
             line++;
         while (*line == ' ' || *line == '\t' || *line == SEPARATOR_CHAR)
             line++;
