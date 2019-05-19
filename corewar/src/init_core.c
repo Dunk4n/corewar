@@ -30,7 +30,7 @@ static void put_theme(char ***tmp, int **tmp_a, corewar_t *core, int index)
 {
     for (int i = 0; i < 4; i++) {
         if ((*tmp)[i] == NULL) {
-            (*tmp)[i] = core->order[index]; 
+            (*tmp)[i] = core->order[index];
             (*tmp_a)[i] = core->adress[index];
             break;
         }
@@ -49,7 +49,7 @@ void sort_name(corewar_t *core)
     tmp[5] = NULL;
     for (int index = 0; index <= 4; index++) {
         if (core->number[index] > 0) {
-            tmp[core->number[index] - 1] = core->order[index];    
+            tmp[core->number[index] - 1] = core->order[index];
             tmp_a[core->number[index] - 1] = core->adress[index];
         }
     }

@@ -34,6 +34,17 @@ int     little_endian(int nb)
     return (tab[0] | tab[1] | tab[2] | tab[3]);
 }
 
+int     error_file(char **file, compil_t *compil, int *head_or_comment, int fd)
+{
+    if (*head_or_comment >= 0)
+        *head_or_comment = check_label(file, compil);
+    if (*head_or_comment < 0) {
+        free_file(file, fd);
+        return (0);
+    }
+    return (1);
+}
+
 char    **parse_head(char const *name, compil_t *compil)
 {
     int     fd;
@@ -51,12 +62,7 @@ char    **parse_head(char const *name, compil_t *compil)
         close(fd);
         return (NULL);
     }
-    if (head_or_comment >= 0)
-        head_or_comment = check_label(file, compil);
-    if (head_or_comment < 0) {
-        free_file(file, fd);
-        return (NULL);
-    }
+    error_file(file, compil, &head_or_comment, fd);
     close(fd);
     return (file);
 }
