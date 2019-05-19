@@ -73,7 +73,6 @@ my_strlen(COMMENT_CMD_STRING)) || (line[i + my_strlen(COMMENT_CMD_STRING)] !=
     while (line[i] && line[i] != '\"' && j < COMMENT_LENGTH)
         head->comment[j++] = line[i++];
     if (!if_end_of_line_is_corect(line, i)) {
-        my_printf("line %d syntax error : %s\n", nb, line);
         return (error(line, nb, "syntax error") -1);
     }
     return (2);
