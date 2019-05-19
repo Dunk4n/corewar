@@ -19,7 +19,7 @@ void    put_color(char cd, int bold, int sortie)
         if (cd == let[i]) {
             (bold == 1) ? color[i][2] = '1' : 0;
             write(sortie, color[i], my_strlen(color[i]));
-            return ;
+            return;
         }
         i++;
     }

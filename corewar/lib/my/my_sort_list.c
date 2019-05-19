@@ -27,7 +27,7 @@ void    sort_list(linked_list_t **begin, int (*cmp)())
     linked_list_t *fix = *begin;
 
     if (begin == NULL || *begin == NULL)
-        return ;
+        return;
     while (bol >= 1) {
         bol = 0;
         fix = *begin;

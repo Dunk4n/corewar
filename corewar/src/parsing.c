@@ -91,7 +91,7 @@ int parse(int ac, char **av, int *arg, corewar_t *core)
         put_champion(av, arg, core);
         return 1;
     } write(2, &av[*arg][0], my_strlen(av[*arg]));
-    write (2, ": command not found\n", 21);
+    write(2, ": command not found\n", 21);
     return 0;
 }
 
