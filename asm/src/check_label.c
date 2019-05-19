@@ -36,7 +36,7 @@ file[i][j] != LABEL_CHAR)
             j++;
         if (file[i][j] == LABEL_CHAR && good_name(file[i][j + 1]) &&
 !is_good_label(file[i] + j + 1, compil)) {
-            error(NULL, 0, "Undefined label\n");
+            error(file[i], i, "Undefined label :");
             return (-1);
         }
         i++;

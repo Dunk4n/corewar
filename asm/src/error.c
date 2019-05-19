@@ -35,7 +35,7 @@ static int     my_put_nbr_err(int nb)
 static void norm(char *err_msg)
 {
     my_putstr_err(ANSI_COLOR_RED);
-    my_putstr_err("asm :");
+    my_putstr_err("asm : ");
     my_putstr_err(ANSI_COLOR_MAGENTA);
     my_putstr_err(err_msg);
     my_putstr_err(ANSI_COLOR_RESET);
@@ -43,8 +43,7 @@ static void norm(char *err_msg)
 
 int     error(char *line, size_t nb, char *err_msg)
 {
-    if (!my_strcmp("failed to open file", err_msg) ||
-!my_strcmp("Undefined label", err_msg)) {
+    if (!my_strcmp("failed to open file\n", err_msg)) {
         norm(err_msg);
         return (0);
     }
