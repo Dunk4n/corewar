@@ -9,7 +9,7 @@
 
 static int number_ok(char c)
 {
-    if (c < '0' || c > '4')
+    if (c < '1' || c > '4')
         return -1;
     return 0;
 }

@@ -100,8 +100,8 @@ int parsing(int ac, char **av, corewar_t *core)
 
     if (!init_core(core))
         return 0;
-    if ((ac - 1) == arg)
-        return 1;
+    if (ac == arg)
+        return 0;
     while (arg < ac) {
         if (!parse(ac, av, &arg, core)) {
             write(2, &av[arg][0], my_strlen(av[arg]));
