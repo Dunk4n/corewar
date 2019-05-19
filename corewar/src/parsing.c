@@ -50,11 +50,11 @@ int option_n(int ac, char **av, int *arg, corewar_t *core)
             core->number[index] = my_getnbr(av[*arg]);
             *arg += 2;
         } else {
-            core->adress[index] = 0;
+            core->adress[index] = -1;
             core->number[index] = my_getnbr(av[*arg]);
         }
         return 1;
-    }
+    } write(2, "-n must be a valide positive value between [1-4]\n", 49);
     return 0;
 }
 
@@ -103,8 +103,11 @@ int parsing(int ac, char **av, corewar_t *core)
     if ((ac - 1) == arg)
         return 1;
     while (arg < ac) {
-        if (!parse(ac, av, &arg, core))
+        if (!parse(ac, av, &arg, core)) {
+            write(2, &av[arg][0], my_strlen(av[arg]));
+            write (2, ": commande not found\n", 21);
             return 0;
+        }
         if ((ac - 1) == arg)
             break;
         arg++;

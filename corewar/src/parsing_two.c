@@ -44,10 +44,11 @@ int count_cor(int ac, char **av, corewar_t *core)
         arguments++;
     }
     core->champions = champions;
+    for (int h = 0; h < 4; h++)
     if (champions == my_champions && my_champions <= 4) {
         core->nb_prog = champions;
         return 1;
     }
-    my_printf("Only 4 champions maximum allowed\n");
+    write(2, "Only 4 champions maximum allowed\n", 33);
     return 0;
 }

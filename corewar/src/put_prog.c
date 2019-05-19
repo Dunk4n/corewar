@@ -19,7 +19,7 @@ int    put_prog(corewar_t *core, char **instr)
             core->prog[i].pc = core->adress[i];
         while (j < core->prog[i].size) {
             if (core->who[(core->prog[i].pc + j) % MEM_SIZE] != -1) {
-                my_printf("overlap detected\n");
+                write(2, "overlap detected\n", 17);
                 return (0);
             }
             core->map[(core->prog[i].pc + j) % MEM_SIZE] = instr[i][j];
