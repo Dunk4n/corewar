@@ -70,7 +70,6 @@ static  void    parameter_byte(compil_t *compil, char *line)
     }
     compil->pos += 1;
 }
-//(i + 1) / 4 + (((double)i / 4.0 > i - 1) ? 1 : 0);
 
 void    compile_instruction(compil_t *compil, char *line)
 {

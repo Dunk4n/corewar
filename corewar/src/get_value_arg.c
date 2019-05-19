@@ -7,14 +7,6 @@
 
 #include "corwar.h"
 
-/*
-    if (op_tab[(int)core->map[prog->pc % MEM_SIZE]].dir_size == 2) {
-        sh.data[1] = core->map[(prog->pc + value) % MEM_SIZE];
-        sh.data[0] = core->map[(prog->pc + value + 1) % MEM_SIZE];
-        return (sh.nb);
-    }
-*/
-
 int     get_value_arg_long(corewar_t *core, prog_t *prog, int value, int type)
 {
     data_t  data;
