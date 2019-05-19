@@ -39,6 +39,7 @@ int     error_file(char **file, compil_t *compil, int *head_or_comment, int fd)
     if (*head_or_comment >= 0)
         *head_or_comment = check_label(file, compil);
     if (*head_or_comment < 0) {
+        error(NULL, 0, "Undefined label");
         free_file(file, fd);
         return (0);
     }
