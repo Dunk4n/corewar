@@ -46,7 +46,7 @@ void sort_name(corewar_t *core)
         tmp[i] = NULL;
         tmp_a[i] = -1;
     }
-    tmp[5] = NULL;
+    tmp[4] = NULL;
     for (int index = 0; index <= 4; index++) {
         if (core->number[index] > 0) {
             tmp[core->number[index] - 1] = core->order[index];

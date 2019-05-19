@@ -61,7 +61,7 @@ int     get_arg(char *map, int pc, int *tab)
 op_tab[(int)instr[0]].type[0];
         return (get_one_param(map, pc, tab, instr));
     }
-    while (i < (size_t)op_tab[(int)instr[0]].nbr_args) {
+    while (i < 4 && i < (size_t)op_tab[(int)instr[0]].nbr_args) {
         instr[1] = (param & (3 << 2 * (3 - (i % 4)))) >> 2 * (3 - (i % 4));
         tab[i + 4] = instr[1];
         pool += get_one_param(map, pc + pool, &(tab[i]), instr);

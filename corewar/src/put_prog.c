@@ -26,6 +26,7 @@ int    put_prog(corewar_t *core, char **instr)
             core->who[(core->prog[i].pc + j) % MEM_SIZE] = core->prog[i].nb;
             j++;
         }
+        free(instr[i]);
         i++;
     }
     free(instr);
