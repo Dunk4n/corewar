@@ -43,5 +43,6 @@ const   op_t    op_tab[] =
 {"rand", 2, {T_REG, T_REG}, 23, 50, "seed -> r2 random", 1, 4},
 {"die", 1, {T_DIR}, 24, 10, "die", 0, 4},
 {"kill", 1, {T_DIR}, 25, 10000, "kill", 0, 4},
+{"stop", 1, {T_DIR}, 26, 1, "stop", 0, 4},
 {0, 0, {0}, 0, 0, 0, 0, 0}
 };

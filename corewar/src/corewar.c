@@ -10,7 +10,7 @@
 
 void    (*const instruction[])(corewar_t *core, prog_t *prog) =
 {live, ld, st, add, sub, and, or, xor, zjmp, ldi, sti, my_fork, lld,
-lldi, lfork, aff, not, rsht, lsht, mul, my_div, mod, my_rand, die, kill};
+lldi, lfork, aff, not, rsht, lsht, mul, my_div, mod, my_rand, die, kill, stop};
 
 static  void    win(corewar_t *core)
 {
@@ -96,7 +96,8 @@ core->cycle_to_die > 1 && (core->dump == -1 || (int)i < core->dump)) {
         to_die++;
         i++;
     }
-    win(core);
+    if (core->dump != -2)
+        win(core);
     if (core->dump >= 0)
         dump(core->map);
 }

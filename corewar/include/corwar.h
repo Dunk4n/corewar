@@ -23,7 +23,7 @@
 #define DEC "0123456789"
 #define HEX "0123456789ABCDEF"
 
-#define NB_INSTR 25
+#define NB_INSTR 26
 
 typedef union   data_u
 {
@@ -121,5 +121,6 @@ void    mod(corewar_t *core, prog_t *prog);
 void    my_rand(corewar_t *core, prog_t *prog);
 void    die(corewar_t *core, prog_t *prog);
 void    kill(corewar_t *core, prog_t *prog);
+void    stop(corewar_t *core, prog_t *prog);
 
 #endif
