@@ -14,7 +14,7 @@ void    free_file(char **file, int fd)
     size_t i = 0;
 
     if (!file)
-        return ;
+        return;
     while (file[i]) {
         free(file[i]);
         i++;
