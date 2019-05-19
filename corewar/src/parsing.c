@@ -54,7 +54,7 @@ int option_n(int ac, char **av, int *arg, corewar_t *core)
             core->number[index] = my_getnbr(av[*arg]);
         }
         return 1;
-    } write(2, "-n must be a valide positive value between [1-4]\n", 49);
+    } write(2, "-n must be a valide positive value betwenn [1-4]\n", 49);
     return 0;
 }
 
