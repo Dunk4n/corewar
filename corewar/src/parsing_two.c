@@ -37,8 +37,7 @@ int count_cor(int ac, char **av, corewar_t *core)
         if (core->order[index] != NULL)
             my_champions++;
         index++;
-    }
-    while (arguments < ac) {
+    } while (arguments < ac) {
         if (my_strstr(av[arguments], ".cor"))
             champions++;
         arguments++;
@@ -48,7 +47,6 @@ int count_cor(int ac, char **av, corewar_t *core)
     if (champions == my_champions && my_champions <= 4) {
         core->nb_prog = champions;
         return 1;
-    }
-    write(2, "Only 4 champions maximum allowed\n", 33);
+    } write(2, "Only 4 champions maximum allowed\n", 33);
     return 0;
 }

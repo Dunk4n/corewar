@@ -20,7 +20,7 @@ int option_a(int ac, char **av, int *arg, corewar_t *core)
             if (core->order[index] == NULL)
                 break;
         index++;
-        } if (!strcmp(av[*arg + 1], "-n")) {
+        } if (!my_strcmp(av[*arg + 1], "-n")) {
             core->number[index] = my_getnbr(av[*arg + 2]);
             core->adress[index] = my_getnbr(av[*arg]);
             *arg += 2;
@@ -45,7 +45,7 @@ int option_n(int ac, char **av, int *arg, corewar_t *core)
             if (core->order[index] == NULL)
                 break;
         index++;
-        } if (!strcmp(av[*arg + 1], "-a")) {
+        } if (!my_strcmp(av[*arg + 1], "-a")) {
             core->adress[index] = my_getnbr(av[*arg + 2]);
             core->number[index] = my_getnbr(av[*arg]);
             *arg += 2;
@@ -87,7 +87,7 @@ int parse(int ac, char **av, int *arg, corewar_t *core)
             return 1;
         else
             return 0;
-    } if (strstr(av[*arg], ".cor")) {
+    } if (my_strstr(av[*arg], ".cor")) {
         put_champion(av, arg, core);
         return 1;
     }
