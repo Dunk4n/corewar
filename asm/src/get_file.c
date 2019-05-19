@@ -30,23 +30,17 @@ static  int     get_name(header_t *head, char *line, size_t nb)
         return (0);
     if (line[i] != '.' || my_strncmp(line + i, NAME_CMD_STRING,
 my_strlen(NAME_CMD_STRING)) || (line[i + my_strlen(NAME_CMD_STRING)] != ' ' &&
-line[i + my_strlen(NAME_CMD_STRING)] != '\t')) {
-        my_printf("line %d syntax error : %s\n", nb, line);
-        return (-1);
-    }
+line[i + my_strlen(NAME_CMD_STRING)] != '\t'))
+        return (error(line, nb, "syntax error") -1);
     i += my_strlen(NAME_CMD_STRING);
     while (line[i] == ' ' || line[i] == '\t')
         i++;
-    if (line[i++] != '\"') {
-        my_printf("line %d syntax error : %s\n", nb, line);
-        return (-1);
-    }
+    if (line[i++] != '\"')
+        return (error(line, nb, "syntax error") -1);
     while (line[i] && line[i] != '\"' && j < PROG_NAME_LENGTH)
         head->prog_name[j++] = line[i++];
-    if (!if_end_of_line_is_corect(line, i)) {
-        my_printf("line %d syntax error : %s\n", nb, line);
-        return (-1);
-    }
+    if (!if_end_of_line_is_corect(line, i))
+        return (error(line, nb, "syntax error") -1);
     return (1);
 }
 
@@ -61,20 +55,17 @@ static  int     get_comment(header_t *head, char *line, size_t nb)
         return (0);
     if (line[i] != '.' || my_strncmp(line + i, COMMENT_CMD_STRING,
 my_strlen(COMMENT_CMD_STRING)) || (line[i + my_strlen(COMMENT_CMD_STRING)] !=
-' ' && line[i + my_strlen(COMMENT_CMD_STRING)] != '\t')) {
+' ' && line[i + my_strlen(COMMENT_CMD_STRING)] != '\t'))
         return (error(line, nb, "syntax error") -1);
-    }
     i += my_strlen(COMMENT_CMD_STRING);
     while (line[i] == ' ' || line[i] == '\t')
         i++;
-    if (line[i++] != '\"') {
+    if (line[i++] != '\"')
         return (error(line, nb, "syntax error") -1);
-    }
     while (line[i] && line[i] != '\"' && j < COMMENT_LENGTH)
         head->comment[j++] = line[i++];
-    if (!if_end_of_line_is_corect(line, i)) {
+    if (!if_end_of_line_is_corect(line, i))
         return (error(line, nb, "syntax error") -1);
-    }
     return (2);
 }
 
