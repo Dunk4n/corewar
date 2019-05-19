@@ -15,9 +15,8 @@ static int   my_putchar_err(char c)
 
 static void    my_putstr_err(char *s)
 {
-    for (int i = 0; s[i]; i++) {
+    for (int i = 0; s[i]; i++)
         my_putchar_err(s[i]);
-    }
 }
 
 static int     my_put_nbr_err(int nb)
@@ -45,13 +44,15 @@ static void norm(char *err_msg)
 int     error(char *line, size_t nb, char *err_msg)
 {
     if (!my_strcmp("failed to open file", err_msg) ||
-    !my_strcmp("Undefined label", err_msg)) {
+!my_strcmp("Undefined label", err_msg)) {
         norm(err_msg);
         return (0);
     }
     my_putstr_err(ANSI_COLOR_RED);
     my_putstr_err(err_msg);
     my_putstr_err(ANSI_COLOR_RESET);
+    if (!line)
+        return (0);
     my_putstr_err(ANSI_COLOR_CYAN);
     my_putstr_err(" line ");
     my_put_nbr_err(nb + 1);

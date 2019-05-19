@@ -35,8 +35,10 @@ int     check_label(char **file, compil_t *compil)
 file[i][j] != LABEL_CHAR)
             j++;
         if (file[i][j] == LABEL_CHAR && good_name(file[i][j + 1]) &&
-!is_good_label(file[i] + j + 1, compil))
+!is_good_label(file[i] + j + 1, compil)) {
+            error(NULL, 0, "Undefined label\n");
             return (-1);
+        }
         i++;
     }
     return (1);

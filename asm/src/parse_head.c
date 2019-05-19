@@ -39,7 +39,6 @@ int     error_file(char **file, compil_t *compil, int *head_or_comment, int fd)
     if (*head_or_comment >= 0)
         *head_or_comment = check_label(file, compil);
     if (*head_or_comment < 0) {
-        error(NULL, 0, "Undefined label");
         free_file(file, fd);
         return (0);
     }
@@ -55,7 +54,7 @@ char    **parse_head(char const *name, compil_t *compil)
     compil->label = NULL;
     compil->nb_label = 0;
     if ((fd = open(name, O_RDONLY)) == -1) {
-        error(NULL, 0, "failed to open file");
+        error(NULL, 0, "failed to open file\n");
         return (NULL);
     }
     compil->head.magic = little_endian(COREWAR_EXEC_MAGIC);
