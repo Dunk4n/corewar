@@ -7,14 +7,6 @@
 
 #include "asm.h"
 
-#define ANSI_COLOR_RED     "\x1b[31m"
-#define ANSI_COLOR_GREEN   "\x1b[32m"
-#define ANSI_COLOR_YELLOW  "\x1b[33m"
-#define ANSI_COLOR_BLUE    "\x1b[34m"
-#define ANSI_COLOR_MAGENTA "\x1b[35m"
-#define ANSI_COLOR_CYAN    "\x1b[36m"
-#define ANSI_COLOR_RESET   "\x1b[0m"
-
 static int   my_putchar_err(char c)
 {
     write(2, &c, 1);
@@ -43,7 +35,8 @@ static int     my_put_nbr_err(int nb)
 
 int     error(char *line, size_t nb, char *err_msg)
 {
-    if (!my_strcmp("failed to open file", err_msg)) {
+    if (!my_strcmp("failed to open file", err_msg) ||
+    !my_strcmp("Undefined label", err_msg)) {
         my_putstr_err(ANSI_COLOR_RED);
         my_putstr_err("asm :");
         my_putstr_err(ANSI_COLOR_MAGENTA);
