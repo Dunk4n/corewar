@@ -1,7 +1,6 @@
 .vscode
 asm/asm
 corewar/corewar
-*.cor
 *.s
 *~
 *.o
