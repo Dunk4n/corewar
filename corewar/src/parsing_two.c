@@ -1,52 +1,76 @@
-/*
-** EPITECH PROJECT, 2018
-** Untitled (Workspace)
-** File description:
-** parsing_two.c
-*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_two.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/11 20:40:05 by niduches          #+#    #+#             */
+/*   Updated: 2020/07/12 17:22:13 by niduches         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdlib.h>
 #include <string.h>
 #include "corwar.h"
 
-int put_champion(char **av, int *arg, corewar_t *core)
+int		put_champion(char **av, int *arg, t_corewar *core)
 {
-    int index = 0;
+	int		index;
 
-    while (index < 4) {
-        if (core->order[index] != NULL) {
-            index++;
-            continue;
-        }
-        else {
-            core->order[index] = my_strdup(av[*arg]);
-            return 1;
-        }
-    }
-    return 0;
+	index = 0;
+	while (index < MAX_ARGS_NUMBER)
+	{
+		if (core->order[index] != NULL)
+		{
+			index++;
+			continue ;
+		}
+		else
+		{
+			core->order[index] = ft_strdup(av[*arg]);
+			if (!core->order[index])
+				return (0);
+			return (1);
+		}
+	}
+	return (0);
 }
 
-int count_cor(int ac, char **av, corewar_t *core)
+void	count_champ(t_corewar *core, int *index, int *my_champions)
 {
-    int index = 0;
-    int arguments = 0;
-    int champions = 0;
-    int my_champions = 0;
+	*index = 0;
+	*my_champions = 0;
+	while (*index < MAX_ARGS_NUMBER)
+	{
+		if (core->order[*index] != NULL)
+			(*my_champions)++;
+		(*index)++;
+	}
+}
 
-    while (index < 4) {
-        if (core->order[index] != NULL)
-            my_champions++;
-        index++;
-    } while (arguments < ac) {
-        if (my_strstr(av[arguments], ".cor"))
-            champions++;
-        arguments++;
-    }
-    core->champions = champions;
-    if (champions == my_champions && my_champions <= 4) {
-        core->nb_prog = champions;
-        return 1;
-    }
-    write(2, "Only 4 champions maximum allowed\n", 33);
-    return 0;
+int		count_cor(int ac, char **av, t_corewar *core)
+{
+	int		index;
+	int		arguments;
+	int		champions;
+	int		my_champions;
+
+	arguments = 0;
+	champions = 0;
+	count_champ(core, &index, &my_champions);
+	while (arguments < ac)
+	{
+		if (ft_strstr(av[arguments], ".cor"))
+			champions++;
+		arguments++;
+	}
+	core->champions = champions;
+	if (champions == my_champions && my_champions <= MAX_ARGS_NUMBER)
+	{
+		core->nb_prog = champions;
+		return (1);
+	}
+	ft_printf("Only %d champions maximum allowed\n", MAX_ARGS_NUMBER);
+	return (0);
 }

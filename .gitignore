@@ -1,9 +1,9 @@
 .vscode
 asm/asm
 corewar/corewar
-*.s
 *~
 *.o
 *.a
 *.swp
+*.cor
 .clang_complete

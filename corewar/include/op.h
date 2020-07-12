@@ -1,16 +1,24 @@
-/*
-** EPITECH PROJECT, 2018
-** include/op
-** File description:
-** csfml is the best thing ever
-*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op.h                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/11 19:57:51 by niduches          #+#    #+#             */
+/*   Updated: 2020/07/12 21:04:00 by niduches         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef _OP_H_
-# define _OP_H_
+#ifndef OP_H
+# define OP_H
 
 # include <unistd.h>
 
-# define MEM_SIZE (6*1024)
+/*
+** 6 * 1024
+*/
+# define MEM_SIZE 6144
 # define IDX_MOD 512
 # define MAX_ARGS_NUMBER 4
 
@@ -26,7 +34,7 @@
 
 # define REG_NUMBER 16
 
-typedef char    args_type_t;
+typedef char			t_args_type;
 
 # define T_REG 1
 # define T_DIR 2
@@ -34,43 +42,46 @@ typedef char    args_type_t;
 
 # define T_LAB 8
 
-struct  op_s
+struct					s_op
 {
-    char        *mnemonique;
-    char        nbr_args;
-    args_type_t type[MAX_ARGS_NUMBER];
-    char        code;
-    int         nbr_cycles;
-    char        *comment;
-    int         oct_parametre;
-    int         dir_size;
+	char		*mnemonique;
+	char		nbr_args;
+	t_args_type type[MAX_ARGS_NUMBER];
+	char		code;
+	int			nbr_cycles;
+	char		*comment;
+	int			oct_parametre;
+	int			dir_size;
 };
 
-typedef struct op_s     op_t;
+typedef struct s_op		t_op;
 
 # define IND_SIZE 2
 # define DIR_SIZE 4
 # define REG_SIZE DIR_SIZE
 
-const   op_t    op_tab[27];
+const t_op				g_op_tab[27];
 
 # define PROG_NAME_LENGTH 128
 # define COMMENT_LENGTH 2048
 
 # define COREWAR_EXEC_MAGIC 0xea83f3
 
-struct header_s
+struct					s_header
 {
-    int  magic;
-    char prog_name[PROG_NAME_LENGTH + 1];
-    int  prog_size;
-    char comment[COMMENT_LENGTH + 1];
+	int		magic;
+	char	prog_name[PROG_NAME_LENGTH + 1];
+	int		prog_size;
+	char	comment[COMMENT_LENGTH + 1];
 };
 
-typedef struct header_s header_t;
+typedef struct s_header	t_header;
 
 # define CYCLE_TO_DIE 1536
 # define CYCLE_DELTA 5
 # define NBR_LIVE 40
+
+# define CHAMP_MAX_SIZE 1000
+# define MAX_CHECKS 4
 
 #endif

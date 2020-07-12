@@ -1,68 +1,84 @@
-/*
-** EPITECH PROJECT, 2019
-** src/my_dump
-** File description:
-** r/ProgrammerHumor
-*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dump.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/11 20:39:43 by niduches          #+#    #+#             */
+/*   Updated: 2020/07/12 01:39:03 by niduches         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdlib.h>
 #include "corwar.h"
 
-static  void    display_char(unsigned char c)
+static void		display_char(unsigned char c)
 {
-    char    *hex = "0123456789ABCDEF";
-    char    to_print[] = "00";
+	char	to_print[3];
 
-    to_print[1] = hex[c % my_strlen(hex)];
-    if (c >= 16) {
-        c /= my_strlen(hex);
-        to_print[0] = hex[c % my_strlen(hex)];
-    }
-    my_putstr(to_print);
+	to_print[0] = '0';
+	to_print[1] = HEX[c % ft_strlen(HEX)];
+	to_print[2] = '\0';
+	if (c >= 16)
+	{
+		c /= ft_strlen(HEX);
+		to_print[0] = HEX[c % ft_strlen(HEX)];
+	}
+	ft_putstr_fd(to_print, 1);
 }
 
-static  void    print_beffor(int start)
+static void		print_beffor(int start)
 {
-    char    beffor[] = "0    : ";
-    char    *hex = "0123456789ABCDEF";
-    int     tmp = start;
-    size_t  j = 0;
+	char	beffor[8];
+	int		tmp;
+	size_t	j;
 
-    if (start > 0) {
-        while (tmp > 0) {
-            tmp /= my_strlen(hex);
-            j++;
-        }
-        j--;
-        while (start > 0) {
-            beffor[j % my_strlen(beffor)] = hex[start % my_strlen(hex)];
-            start /= my_strlen(hex);
-            j--;
-        }
-    }
-    my_putstr(beffor);
+	ft_strcpy(beffor, "0    : ");
+	tmp = start;
+	j = 0;
+	if (start > 0)
+	{
+		while (tmp > 0)
+		{
+			tmp /= ft_strlen(HEX);
+			++j;
+		}
+		--j;
+		while (start > 0)
+		{
+			beffor[j % ft_strlen(beffor)] = HEX[start % ft_strlen(HEX)];
+			start /= ft_strlen(HEX);
+			--j;
+		}
+	}
+	ft_putstr_fd(beffor, 1);
 }
 
-static  void    display_line(char *map, int start)
+static void		display_line(char *map, int start)
 {
-    size_t  i = 0;
+	size_t	i;
 
-    print_beffor(start);
-    while (i < 32) {
-        display_char((unsigned char)map[i]);
-        if (i < 31)
-            my_putchar(' ');
-        i++;
-    }
-    my_putchar('\n');
+	i = 0;
+	print_beffor(start);
+	while (i < 32)
+	{
+		display_char((unsigned char)map[i]);
+		if (i < 31)
+			ft_putchar_fd(' ', 1);
+		i++;
+	}
+	ft_putchar_fd('\n', 1);
 }
 
-void    dump(char *map)
+void			dump(char *map)
 {
-    size_t  i = 0;
+	size_t	i;
 
-    while (i < MEM_SIZE / 32) {
-        display_line(map + 32 * i, 32 * i);
-        i++;
-    }
+	i = 0;
+	while (i < MEM_SIZE / 32)
+	{
+		display_line(map + 32 * i, 32 * i);
+		i++;
+	}
 }

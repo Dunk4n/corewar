@@ -1,58 +1,77 @@
-##
-## EPITECH PROJECT, 2018
-## Makefile
-## File description:
-## Makefile
-##
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: niduches <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/10/19 16:00:17 by niduches          #+#    #+#              #
+#    Updated: 2020/07/11 20:16:56 by niduches         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-D_SRC	=	./src/
-D_INC	=	./include/
-D_LIB	=	./lib/my/
+CC			=	gcc
 
-SRC	=	$(D_SRC)main.c			\
-		$(D_SRC)op.c			\
-		$(D_SRC)parse_head.c		\
-		$(D_SRC)get_file.c		\
-		$(D_SRC)bad_instruction.c	\
-		$(D_SRC)check_arg.c		\
-		$(D_SRC)is_label.c		\
-		$(D_SRC)write_head.c		\
-		$(D_SRC)write_instruction.c	\
-		$(D_SRC)compile_instruction.c	\
-		$(D_SRC)set_parameter.c		\
-		$(D_SRC)is_arg.c		\
-		$(D_SRC)check_label.c		\
-		$(D_SRC)my_getnbr_long.c	\
-		$(D_SRC)error.c			\
+D_SRC		=	./src/
+D_INC		=	./include/
 
-OBJ	=	$(SRC:%.c=%.o)
+BUILD_DIR	=	build
 
-NAME	=	asm
+SRC_PATH	=	main.c					\
+				op.c					\
+				parse_head.c			\
+				get_file.c				\
+				bad_instruction.c		\
+				check_arg.c				\
+				is_label.c				\
+				write_head.c			\
+				write_instruction.c		\
+				compile_instruction.c	\
+				set_parameter.c			\
+				is_arg.c				\
+				check_label.c			\
+				my_getnbr_long.c		\
+				error.c					\
 
-CFLAGS	=	-W -Wall -Wextra -I$(D_INC)
+SRC			=	$(addprefix $(D_SRC),$(SRC_PATH))
 
-LDFLAGS	=	-L$(D_LIB) -lmy
+NAME		=	asm
 
-all: $(NAME)
+OBJ			=	$(SRC:%.c=$(BUILD_DIR)/%.o)
 
-libmy:
-	@make -C $(D_LIB)
+CFLAGS		=	-I$(D_INC) -Wall -Wextra -Werror
+
+LDFLAGS		=	-L./libft/ -lft
+
+all:	$(NAME)
+
+options:
+	@echo "  CC       $(CC)"
+	@echo "  CFLAGS   $(CFLAGS)"
+	@echo "  LDFLAGS  $(LDFLAGS)"
+
+$(BUILD_DIR)/%.o: %.c $(INC)
+	@mkdir -p $(@D)
+	@echo "  CC       $<"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJ)
+	@make -C libft/ clean
+	@echo "  RM       $(BUILD_DIR)"
+	@rm -rf $(BUILD_DIR)
 
-fclean:
-	@$(MAKE) clean
-	@$(MAKE) -C $(D_LIB) fclean
-	@rm -f $(NAME)
-	@rm -f *~
+fclean: clean
+	@make -C libft/ fclean
+	@echo "  RM       $(NAME)"
+	@rm -f $(NAME) *~
 
-$(NAME): $(OBJ)
-	@$(MAKE) -C lib/my
-	@gcc -g -o $(NAME) $(OBJ) $(LDFLAGS)
+$(NAME): options $(OBJ)
+	@make -C libft/
+	@echo "  BUILD    $@"
+	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS) ./libft/libft.a
 
 re:
-	@$(MAKE) fclean
-	@$(MAKE) all
+	@$(MAKE) fclean --no-print-directory
+	@$(MAKE) all --no-print-directory
 
-.PHONY: all clean fclean re
+.PHONY: all options clean fclean re

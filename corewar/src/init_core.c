@@ -1,69 +1,104 @@
-/*
-** EPITECH PROJECT, 2018
-** Untitled (Workspace)
-** File description:
-** init_core.c
-*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_core.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/11 20:39:46 by niduches          #+#    #+#             */
+/*   Updated: 2020/07/12 16:47:53 by niduches         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdlib.h>
 #include "corwar.h"
 
-int init_core(corewar_t *core)
+void		init_core(t_corewar *core)
 {
-    int index = 0;
+	int		index;
+	int		i;
 
-    while (index < 4) {
-        core->order[index] = NULL;
-        index++;
-    }
-    core->order[4] = NULL;
-    for (int i = 0; i < 4; i++)
-        core->adress[i] = -1;
-    for (int i = 0; i < 4; i++)
-        core->number[i] = 0;
-    core->champions = -1;
-    core->dump = -1;
-    return 1;
+	index = 0;
+	while (index < MAX_ARGS_NUMBER)
+	{
+		core->order[index] = NULL;
+		index++;
+	}
+	core->order[MAX_ARGS_NUMBER] = NULL;
+	i = 0;
+	while (i < MAX_ARGS_NUMBER)
+		core->adress[i++] = -1;
+	i = 0;
+	while (i < MAX_ARGS_NUMBER)
+		core->number[i++] = 0;
+	core->champions = -1;
+	core->dump = -1;
 }
 
-static void put_theme(char ***tmp, int **tmp_a, corewar_t *core, int index)
+static void	put_theme(char ***tmp, int **tmp_a, t_corewar *core, int index)
 {
-    for (int i = 0; i < 4; i++) {
-        if ((*tmp)[i] == NULL) {
-            (*tmp)[i] = core->order[index];
-            (*tmp_a)[i] = core->adress[index];
-            break;
-        }
-    }
+	int		i;
+
+	i = 0;
+	while (i < MAX_ARGS_NUMBER)
+	{
+		if ((*tmp)[i] == NULL)
+		{
+			(*tmp)[i] = core->order[index];
+			(*tmp_a)[i] = core->adress[index];
+			break ;
+		}
+		++i;
+	}
 }
 
-void free_tmp(char ***tmp, int **tmp_a)
+static void	put_tmp_in_core(t_corewar *core, char **tmp, int *tmp_a)
 {
-    free(*tmp);
-    free(*tmp_a);
+	int		i;
+
+	i = 0;
+	while (i <= MAX_ARGS_NUMBER)
+	{
+		if (core->number[i] == 0)
+			put_theme(&tmp, &tmp_a, core, i);
+		++i;
+	}
+	i = 0;
+	while (i < MAX_ARGS_NUMBER)
+	{
+		core->order[i] = tmp[i];
+		++i;
+	}
+	i = 0;
+	while (i < MAX_ARGS_NUMBER)
+	{
+		core->adress[i] = tmp_a[i];
+		++i;
+	}
 }
 
-void sort_name(corewar_t *core)
+void		sort_name(t_corewar *core)
 {
-    char **tmp = malloc(sizeof(char *) * 5);
-    int *tmp_a = malloc(sizeof(int) * 4);
+	char	*tmp[MAX_ARGS_NUMBER + 1];
+	int		tmp_a[MAX_ARGS_NUMBER];
+	int		i;
 
-    for (int i = 0; i < 4; i++) {
-        tmp[i] = NULL;
-        tmp_a[i] = -1;
-    }
-    tmp[4] = NULL;
-    for (int index = 0; index <= 4; index++) {
-        if (core->number[index] > 0) {
-            tmp[core->number[index] - 1] = core->order[index];
-            tmp_a[core->number[index] - 1] = core->adress[index];
-        }
-    } for (int index = 0; index <= 4; index++) {
-        if (core->number[index] == 0)
-            put_theme(&tmp, &tmp_a, core, index);
-    } for (int i = 0; i < 4; i++)
-        core->order[i] = tmp[i];
-    for (int i = 0; i < 4; i++)
-        core->adress[i] = tmp_a[i];
-    free_tmp(&tmp, &tmp_a);
+	i = 0;
+	while (i < MAX_ARGS_NUMBER)
+	{
+		tmp[i] = NULL;
+		tmp_a[i++] = -1;
+	}
+	tmp[MAX_ARGS_NUMBER] = NULL;
+	i = 0;
+	while (i <= MAX_ARGS_NUMBER)
+	{
+		if (core->number[i] > 0)
+		{
+			tmp[core->number[i] - 1] = core->order[i];
+			tmp_a[core->number[i] - 1] = core->adress[i];
+		}
+		++i;
+	}
+	put_tmp_in_core(core, tmp, tmp_a);
 }

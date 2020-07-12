@@ -1,82 +1,104 @@
-##
-## EPITECH PROJECT, 2018
-## Makefile
-## File description:
-## Makefile
-##
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: niduches <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/10/19 16:00:17 by niduches          #+#    #+#              #
+#    Updated: 2020/07/12 20:50:04 by niduches         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-D_SRC	=	./src/
-D_INC	=	./include/
-D_LIB	=	./lib/my/
+CC			=	gcc
 
-SRC	=	$(D_SRC)op.c			\
-		$(D_SRC)charge_cor.c		\
-		$(D_SRC)charge_all_cor.c	\
-		$(D_SRC)put_prog.c		\
-		$(D_SRC)corewar.c		\
-		$(D_SRC)get_arg.c		\
-		$(D_SRC)get_value_arg.c		\
-		$(D_SRC)live.c			\
-		$(D_SRC)ld.c			\
-		$(D_SRC)st.c			\
-		$(D_SRC)add.c			\
-		$(D_SRC)sub.c			\
-		$(D_SRC)and.c			\
-		$(D_SRC)or.c			\
-		$(D_SRC)xor.c			\
-		$(D_SRC)zjmp.c			\
-		$(D_SRC)ldi.c			\
-		$(D_SRC)sti.c			\
-		$(D_SRC)fork.c			\
-		$(D_SRC)lld.c			\
-		$(D_SRC)lldi.c			\
-		$(D_SRC)lfork.c			\
-		$(D_SRC)aff.c			\
-		$(D_SRC)not.c			\
-		$(D_SRC)rsht.c			\
-		$(D_SRC)lsht.c			\
-		$(D_SRC)mul.c			\
-		$(D_SRC)div.c			\
-		$(D_SRC)mod.c			\
-		$(D_SRC)rand.c			\
-		$(D_SRC)die.c			\
-		$(D_SRC)kill.c			\
-		$(D_SRC)stop.c			\
-		$(D_SRC)dump.c			\
-		$(D_SRC)parsing.c		\
-		$(D_SRC)parsing_two.c		\
-		$(D_SRC)is_num.c		\
-		$(D_SRC)init_core.c		\
-		$(D_SRC)main.c
+D_SRC		=	./src/
+D_INC		=	./include/
 
-OBJ	=	$(SRC:%.c=%.o)
+BUILD_DIR	=	build
 
-NAME	=	corewar
+SRC_PATH	=	op.c				\
+				charge_cor.c		\
+				charge_all_cor.c	\
+				put_prog.c			\
+				corewar.c			\
+				get_arg.c			\
+				get_value_arg.c		\
+				live.c				\
+				ld.c				\
+				st.c				\
+				add.c				\
+				sub.c				\
+				and.c				\
+				or.c				\
+				xor.c				\
+				zjmp.c				\
+				ldi.c				\
+				sti.c				\
+				fork.c				\
+				lld.c				\
+				lldi.c				\
+				lfork.c				\
+				aff.c				\
+				not.c				\
+				rsht.c				\
+				lsht.c				\
+				mul.c				\
+				div.c				\
+				mod.c				\
+				rand.c				\
+				die.c				\
+				kill.c				\
+				stop.c				\
+				dump.c				\
+				parsing.c			\
+				parsing_two.c		\
+				is_num.c			\
+				init_core.c			\
+				main.c				\
+				option.c			\
+				corewar_live.c		\
+				utils.c				\
 
-CFLAGS	=	-W -Wall -Wextra -I$(D_INC)
+SRC			=	$(addprefix $(D_SRC),$(SRC_PATH))
 
-LDFLAGS	=	-L$(D_LIB) -lmy
+NAME		=	corewar
 
-all: $(NAME)
+OBJ			=	$(SRC:%.c=$(BUILD_DIR)/%.o)
 
-libmy:
-	@make -C $(D_LIB)
+CFLAGS		=	-I$(D_INC) -Wall -Wextra -g#-Werror
+
+LDFLAGS		=	-L./libft/ -lft
+
+all:	$(NAME)
+
+options:
+	@echo "  CC       $(CC)"
+	@echo "  CFLAGS   $(CFLAGS)"
+	@echo "  LDFLAGS  $(LDFLAGS)"
+
+$(BUILD_DIR)/%.o: %.c $(INC)
+	@mkdir -p $(@D)
+	@echo "  CC       $<"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJ)
+	@make -C libft/ clean
+	@echo "  RM       $(BUILD_DIR)"
+	@rm -rf $(BUILD_DIR)
 
-fclean:
-	@$(MAKE) clean
-	@$(MAKE) -C $(D_LIB) fclean
-	@rm -f $(NAME)
-	@rm -f *~
+fclean: clean
+	@make -C libft/ fclean
+	@echo "  RM       $(NAME)"
+	@rm -f $(NAME) *~
 
-$(NAME): $(OBJ)
-	@$(MAKE) -C lib/my
-	@gcc -g -o $(NAME) $(OBJ) $(LDFLAGS)
+$(NAME): options $(OBJ)
+	@make -C libft/
+	@echo "  BUILD    $@"
+	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LDFLAGS) ./libft/libft.a
 
 re:
-	@$(MAKE) fclean
-	@$(MAKE) all
+	@$(MAKE) fclean --no-print-directory
+	@$(MAKE) all --no-print-directory
 
-.PHONY: all clean fclean re
+.PHONY: all options clean fclean re

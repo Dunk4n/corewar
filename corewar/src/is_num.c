@@ -1,28 +1,33 @@
-/*
-** EPITECH PROJECT, 2018
-** Untitled (Workspace)
-** File description:
-** is_num.c
-*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_num.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/11 20:39:47 by niduches          #+#    #+#             */
+/*   Updated: 2020/07/12 14:07:07 by niduches         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "corwar.h"
 
-static int number_ok(char c)
+int			is_number(char *str)
 {
-    if (c < '1' || c > '4')
-        return -1;
-    return 0;
-}
+	int		nb;
+	char	*tmp;
 
-int is_number(char *str)
-{
-    for (size_t index = 0; str; index++) {
-        if ((str[index]) == '\0')
-            break;
-        if (number_ok(str[index]) == 0)
-            continue;
-        else
-            return (0);
-    }
-    return 1;
+	if (!str)
+		return (0);
+	tmp = str;
+	while (*tmp)
+	{
+		if (*tmp < '0' || *tmp > '9')
+			return (0);
+		++tmp;
+	}
+	nb = ft_atoi(str);
+	if (nb <= 0 || nb > MAX_ARGS_NUMBER)
+		return (0);
+	return (1);
 }

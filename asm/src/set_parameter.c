@@ -1,93 +1,105 @@
-/*
-** EPITECH PROJECT, 2018
-** src/set_parameter
-** File description:
-** check your malloc!
-*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_parameter.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: niduches <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/10 13:33:10 by niduches          #+#    #+#             */
+/*   Updated: 2020/07/10 13:35:56 by niduches         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdlib.h>
 #include "asm.h"
 
-static  int     get_pos_label(compil_t *compil, char *line)
+static int	get_pos_label(t_compil *compil, char *line)
 {
-    size_t i = 0;
-    size_t len = 0;
+	size_t	i;
+	size_t	len;
 
-    while (line[len] && line[len] != ' ' && line[len] != '\t' &&
-line[len] != SEPARATOR_CHAR && line[len] != COMMENT_CHAR)
-        len++;
-    while (i < compil->nb_label) {
-        if (!my_strncmp(compil->label[i].name, line, len) &&
-(int)len == my_strlen(compil->label[i].name))
-            return (compil->label[i].pos);
-        i++;
-    }
-    return (0);
+	i = 0;
+	len = 0;
+	while (line[len] && line[len] != ' ' && line[len] != '\t' &&
+			line[len] != SEPARATOR_CHAR && line[len] != COMMENT_CHAR)
+		len++;
+	while (i < compil->nb_label)
+	{
+		if (!ft_strncmp(compil->label[i].name, line, len) &&
+				len == ft_strlen(compil->label[i].name))
+			return (compil->label[i].pos);
+		i++;
+	}
+	return (0);
 }
 
-static  void    set_ind(compil_t *compil, char *line, int arg, int pos)
+static void	set_ind(t_compil *compil, char *line, int arg, int pos)
 {
-    short_t sh;
+	t_short	sh;
 
-    if (arg == 1)
-        sh.nb = my_getnbr(line);
-    else
-        sh.nb = get_pos_label(compil, line + 1) - pos;
-    compil->instr[compil->pos++] = sh.data[1];
-    compil->instr[compil->pos++] = sh.data[0];
+	if (arg == 1)
+		sh.nb = ft_getnbr(line);
+	else
+		sh.nb = get_pos_label(compil, line + 1) - pos;
+	compil->instr[compil->pos++] = sh.data[1];
+	compil->instr[compil->pos++] = sh.data[0];
 }
 
-static  void    set_dir(compil_t *compil, char *line, int arg, int *tab)
+static void	set_dir(t_compil *compil, char *line, int arg, int *tab)
 {
-    short_t sh;
-    data_t  data;
+	t_short	sh;
+	t_data	data;
 
-    if (op_tab[tab[0]].dir_size == 4) {
-        if (arg == 1)
-            data.nb = (int)my_getnbr_long(line + 1);
-        else
-            data.nb = get_pos_label(compil, line + 2) - tab[1];
-        compil->instr[compil->pos++] = data.data[3];
-        compil->instr[compil->pos++] = data.data[2];
-        compil->instr[compil->pos++] = data.data[1];
-        compil->instr[compil->pos++] = data.data[0];
-        return ;
-    }
-    if (arg == 1)
-        sh.nb = my_getnbr(line + 1);
-    else
-        sh.nb = get_pos_label(compil, line + 2) - (tab[1]);
-    compil->instr[compil->pos++] = sh.data[1];
-    compil->instr[compil->pos++] = sh.data[0];
+	if (g_op_tab[tab[0]].dir_size == 4)
+	{
+		if (arg == 1)
+			data.nb = (int)ft_getnbr_long(line + 1);
+		else
+			data.nb = get_pos_label(compil, line + 2) - tab[1];
+		compil->instr[compil->pos++] = data.data[3];
+		compil->instr[compil->pos++] = data.data[2];
+		compil->instr[compil->pos++] = data.data[1];
+		compil->instr[compil->pos++] = data.data[0];
+		return ;
+	}
+	if (arg == 1)
+		sh.nb = ft_getnbr(line + 1);
+	else
+		sh.nb = get_pos_label(compil, line + 2) - (tab[1]);
+	compil->instr[compil->pos++] = sh.data[1];
+	compil->instr[compil->pos++] = sh.data[0];
 }
 
-static  void    set_one_parameter(compil_t *compil, char *line, int code,
-int pos)
+static void	set_one_parameter(t_compil *compil, char *line, int code, int pos)
 {
-    int arg;
-    int tab[] = {code, pos};
+	int	arg;
+	int	tab[2];
 
-    if (is_reg(line))
-        compil->instr[compil->pos++] = my_getnbr(line + 1);
-    if ((arg = is_dir(line)))
-        set_dir(compil, line, arg, tab);
-    if ((arg = is_ind(line)))
-        set_ind(compil, line, arg, pos);
+	tab[0] = code;
+	tab[1] = pos;
+	if (is_reg(line))
+		compil->instr[compil->pos++] = ft_getnbr(line + 1);
+	if ((arg = is_dir(line)))
+		set_dir(compil, line, arg, tab);
+	if ((arg = is_ind(line)))
+		set_ind(compil, line, arg, pos);
 }
 
-void    set_parameter(compil_t *compil, char *line, int code, int pos)
+void		set_parameter(t_compil *compil, char *line, int code, int pos)
 {
-    size_t  i = 0;
+	size_t	i;
 
-    while (*line && i < MAX_ARGS_NUMBER) {
-        set_one_parameter(compil, line, code, pos);
-        while (*line && *line != ' ' && *line != '\t' && *line !=
-SEPARATOR_CHAR && *line != COMMENT_CHAR)
-            line++;
-        while (*line == ' ' || *line == '\t' || *line == SEPARATOR_CHAR)
-            line++;
-        if (*line == COMMENT_CHAR)
-            return ;
-        i++;
-    }
+	i = 0;
+	while (*line && i < MAX_ARGS_NUMBER)
+	{
+		set_one_parameter(compil, line, code, pos);
+		while (*line && *line != ' ' && *line != '\t' && *line !=
+				SEPARATOR_CHAR && *line != COMMENT_CHAR)
+			line++;
+		while (*line == ' ' || *line == '\t' || *line == SEPARATOR_CHAR)
+			line++;
+		if (*line == COMMENT_CHAR)
+			return ;
+		i++;
+	}
 }
